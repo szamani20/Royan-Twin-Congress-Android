@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/invited_icon"
+        id="@+id/tab_is"
+        title="Invited Speakers" />
+    <tab
+        icon="@drawable/oral_icon"
+        id="@+id/tab_os"
+        title="Oral Speakers" />
+    <tab
+        icon="@drawable/poster_icon"
+        id="@+id/tab_p"
+        title="Posters" />
+</tabs>
