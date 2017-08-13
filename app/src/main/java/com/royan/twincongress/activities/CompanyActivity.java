@@ -46,7 +46,6 @@ public class CompanyActivity extends CompanyBaseActivity {
 
         initModel();
         initRecyclerView();
-        initViews();
     }
 
     @Override

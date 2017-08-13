@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView RBCCardView;
     private CardView AKPCardView;
     private CardView nurseCardView;
+    private Drawer drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 .withIcon(R.drawable.ic_update_black_24dp)
                 .withIdentifier(Constants.ITEM_UPDATE).withName(R.string.update);
 
-        Drawer drawer = new DrawerBuilder()
+        drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withTranslucentStatusBar(false)
@@ -152,4 +153,12 @@ public class MainActivity extends AppCompatActivity {
         drawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (drawer != null) {
+            drawer.setSelection(-1);
+            drawer.closeDrawer();
+        }
+    }
 }

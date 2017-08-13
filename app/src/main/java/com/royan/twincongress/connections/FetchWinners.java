@@ -24,7 +24,7 @@ public class FetchWinners {
             Gson gson = new GsonBuilder().serializeNulls().create();
             Type collectionType = new TypeToken<Collection<Winner>>() {
             }.getType();
-            String base_url = "https://royan.szamani.ir/akp/fetch";
+            String base_url = "https://royan.szamani.ir/akp/fetch/";
 
             String winnerType;
             switch (type) {
@@ -41,9 +41,10 @@ public class FetchWinners {
 
             FetchBodyRequest bodyRequest = new FetchBodyRequest(
                     winnerType, start_id, end_id);
-
+            System.out.println(base_url);
+            System.out.println(gson.toJson(bodyRequest));
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-
+            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();

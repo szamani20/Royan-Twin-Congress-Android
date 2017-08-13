@@ -35,6 +35,23 @@ public class Constants {
     public static final int KEYWORD = 5;
     public static final int ABSTRACT_SIZE = 6;
 
+    public static final String SPEAKER = "speaker";
+    public static final String WINNER = "winner";
+    public static final String COMPANY = "company";
+
+    public static final String SCC = "scc";
+    public static final String RBC = "rbc";
+    public static final String NURSE = "nurse";
+
+    public static final String NATIONAL = "national";
+    public static final String INTERNATIONAL = "international";
+    public static final String ORDINARY = "ordinary";
+    public static final String SPONSOR = "sponsor";
+
+    public static final String IS = "is";
+    public static final String OP = "op";
+    public static final String POSTER = "poster";
+
     public static final String SPEAKER_ID = "SPEAKER_ID";
 
     public static final int SPEAKER_FETCH_SIZE = 20;

@@ -45,7 +45,6 @@ public class SponsorActivity extends CompanyBaseActivity {
 
         initModel();
         initRecyclerView();
-        initViews();
     }
 
     @Override

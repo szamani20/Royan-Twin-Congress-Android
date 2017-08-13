@@ -57,7 +57,7 @@ public class FetchCongress {
                     base_url += "nc";
                     break;
             }
-            base_url += "/fetch";
+            base_url += "/fetch/";
             String speaker_type;
             switch (type) {
                 case 0:
@@ -76,7 +76,7 @@ public class FetchCongress {
                     speaker_type, start_id, end_id);
 
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-
+            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,9 +85,21 @@ public class FetchCongress {
     }
 
     public List<Speaker> getSpeakerAll(int congress, int type) {
-//        System.out.println(congress + " " + type);
         try {
-            Gson gson = new GsonBuilder().serializeNulls().create();
+//            Gson gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new GsonBuilder()
+                    .serializeNulls()
+                    .addDeserializationExclusionStrategy(new ExclusionStrategy() {
+                        @Override
+                        public boolean shouldSkipField(FieldAttributes f) {
+                            return f.getName().toLowerCase().equals("bookmarked");
+                        }
+                        @Override
+                        public boolean shouldSkipClass(Class<?> clazz) {
+                            return false;
+                        }
+                    })
+                    .create();
             Type collectionType = new TypeToken<Collection<Speaker>>() {
             }.getType();
             String base_url = setBaseUrl("https://royan.szamani.ir/", congress, type);
@@ -95,8 +107,6 @@ public class FetchCongress {
             System.out.println(result_string);
 
             List<Speaker> res = gson.fromJson(result_string, collectionType);
-//            for (Speaker s : res)
-//                System.out.println(s.congress + " " + s.type + " " + s.name);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

@@ -31,10 +31,43 @@ import static com.royan.twincongress.connections.FetchHelper.postUrlString;
 public class FetchCompany {
     public List<Company> getCompanyRange(int type, int start_id, int end_id) {
         try {
-            Gson gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new GsonBuilder()
+                    .serializeNulls()
+                    .setExclusionStrategies(new ExclusionStrategy() {
+                        @Override
+                        public boolean shouldSkipField(FieldAttributes f) {
+                            return f.getDeclaredClass().equals(RealmObject.class);
+                        }
+
+                        @Override
+                        public boolean shouldSkipClass(Class<?> clazz) {
+                            return false;
+                        }
+                    })
+                    .registerTypeAdapter(
+                            new TypeToken<RealmList<RealmString>>() {
+                            }.getType(),
+                            new TypeAdapter<RealmList<RealmString>>() {
+                                @Override
+                                public void write(JsonWriter out, RealmList<RealmString> value) throws IOException {
+
+                                }
+
+                                @Override
+                                public RealmList<RealmString> read(JsonReader in) throws IOException {
+                                    RealmList<RealmString> list = new RealmList<RealmString>();
+                                    in.beginArray();
+                                    while (in.hasNext())
+                                        list.add(new RealmString(in.nextString()));
+                                    in.endArray();
+                                    return list;
+                                }
+                            }
+                    )
+                    .create();
             Type collectionType = new TypeToken<Collection<Company>>() {
             }.getType();
-            String base_url = "https://royan.szamani.ir/company/fetch";
+            String base_url = "https://royan.szamani.ir/company/fetch/";
 
             String companyType;
             switch (type) {
@@ -53,7 +86,7 @@ public class FetchCompany {
                     companyType, start_id, end_id);
 
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-
+            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,7 +111,8 @@ public class FetchCompany {
                         }
                     })
                     .registerTypeAdapter(
-                            new TypeToken<RealmList<RealmString>>() {}.getType(),
+                            new TypeToken<RealmList<RealmString>>() {
+                            }.getType(),
                             new TypeAdapter<RealmList<RealmString>>() {
                                 @Override
                                 public void write(JsonWriter out, RealmList<RealmString> value) throws IOException {

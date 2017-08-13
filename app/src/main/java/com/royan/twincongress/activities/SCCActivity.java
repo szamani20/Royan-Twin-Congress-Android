@@ -117,6 +117,7 @@ public class SCCActivity extends CongressBaseActivity {
             System.out.println(DataEntries.SCC_IS_Speaker.size());
         if (DataEntries.SCC_IS_Speaker == null ||
                 DataEntries.SCC_IS_Speaker.size() == 0) {
+            System.out.println("YOU ARE GODDAMN RIGHT");
             DataEntries.SCC_IS_Speaker = new ArrayList<>();
             fetchData(Constants.SCC_CONGRESS, Constants.IS_SPEAKER);
         }

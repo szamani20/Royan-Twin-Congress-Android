@@ -23,20 +23,6 @@ public class Speaker extends RealmObject {
     public Boolean bookmarked; // excluded when GSONing
     public Abstract aabstract;
 
-//    public Speaker(Integer type, Integer congress, String name, String email, String country, String avatar, String affiliation, String topic, String time, String venue, Abstract sAbstract) {
-//        this.type = type;
-//        this.congress = congress;
-//        this.name = name;
-//        this.email = email;
-//        this.country = country;
-//        this.avatar = avatar;
-//        this.affiliation = affiliation;
-//        this.topic = topic;
-//        this.time = time;
-//        this.venue = venue;
-//        this.sAbstract = sAbstract;
-//    }
-
     public Speaker() {
     }
 

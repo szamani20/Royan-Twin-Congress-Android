@@ -27,10 +27,4 @@ public abstract class CompanyBaseActivity extends AppCompatActivity {
     protected abstract void initModel();
 
     protected abstract void fetchData();
-
-    protected void initViews() {
-        inflater = (LayoutInflater)
-                this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        nested = (NestedScrollView) findViewById(R.id.nested);
-    }
 }
