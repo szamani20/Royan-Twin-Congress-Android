@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.models.Abstract;
 
+import butterknife.BindView;
+import butterknife.BindViews;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.royan.twincongress.helpers.Constants.ABSTRACT_SIZE;
@@ -27,33 +29,27 @@ import static com.royan.twincongress.helpers.Constants.RESULT;
  * Created by szamani on 8/10/2017.
  */
 
-public abstract class PersonDetailBaseActivity extends AppCompatActivity
-        implements AppBarLayout.OnOffsetChangedListener {
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-    private static final int ALPHA_ANIMATIONS_DURATION = 200;
-
-    private boolean mIsTheTitleVisible = false;
-    private boolean mIsTheTitleContainerVisible = true;
-
+public abstract class PersonDetailBaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
-    protected LinearLayout mTitleContainer;
-    protected TextView mTitle;
-    protected CardView[] cardViews;
-    protected TextView nameText;
-    protected TextView subText;
-    protected CircleImageView avatar;
-    protected AppBarLayout mAppBarLayout;
+    @BindView(R.id.nameTextCollapsed)
+    TextView mTitle;
+    @BindViews({R.id.backgroundSection, R.id.objectiveSection, R.id.methodSection,
+            R.id.resultSection, R.id.conclusionSection, R.id.keywordSection})
+    CardView[] cardViews;
+//    @BindView(R.id.nameText)
+//    TextView nameText;
+    @BindView(R.id.avatar)
+    CircleImageView avatar;
 
     protected void initCardViews(Abstract aabstract) {
-        if (cardViews == null)
-            cardViews = new CardView[ABSTRACT_SIZE];
-        cardViews[BACKGROUND] = (CardView) findViewById(R.id.backgroundSection);
-        cardViews[OBJECTIVE] = (CardView) findViewById(R.id.objectiveSection);
-        cardViews[METHOD] = (CardView) findViewById(R.id.methodSection);
-        cardViews[RESULT] = (CardView) findViewById(R.id.resultSection);
-        cardViews[CONCLUSION] = (CardView) findViewById(R.id.conclusionSection);
-        cardViews[KEYWORD] = (CardView) findViewById(R.id.keywordSection);
+//        if (cardViews == null)
+//            cardViews = new CardView[ABSTRACT_SIZE];
+//        cardViews[BACKGROUND] = (CardView) findViewById(R.id.backgroundSection);
+//        cardViews[OBJECTIVE] = (CardView) findViewById(R.id.objectiveSection);
+//        cardViews[METHOD] = (CardView) findViewById(R.id.methodSection);
+//        cardViews[RESULT] = (CardView) findViewById(R.id.resultSection);
+//        cardViews[CONCLUSION] = (CardView) findViewById(R.id.conclusionSection);
+//        cardViews[KEYWORD] = (CardView) findViewById(R.id.keywordSection);
 
         if (aabstract.background != null &&
                 aabstract.background.length() != 0) {
@@ -111,67 +107,7 @@ public abstract class PersonDetailBaseActivity extends AppCompatActivity
         }
     }
 
-    protected void initViews() {
-        mTitle = (TextView) findViewById(R.id.nameTextCollapsed);
-        nameText = (TextView) findViewById(R.id.nameText);
-        subText = (TextView) findViewById(R.id.subText);
-        avatar = (CircleImageView) findViewById(R.id.avatar);
-        mTitleContainer = (LinearLayout) findViewById(R.id.linearLayoutTitle);
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.appBar);
-    }
-
     protected abstract void initDataModel();
+
     protected abstract void bindViewData();
-
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float percentage = (float) Math.abs(offset) / (float) maxScroll;
-
-        handleAlphaOnTitle(percentage);
-        handleToolbarTitleVisibility(percentage);
-    }
-
-    private void handleToolbarTitleVisibility(float percentage) {
-        if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-
-            if (!mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleVisible = true;
-            }
-
-        } else {
-
-            if (mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleVisible = false;
-            }
-        }
-    }
-
-    private void handleAlphaOnTitle(float percentage) {
-        if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if (mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleContainerVisible = false;
-            }
-
-        } else {
-
-            if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleContainerVisible = true;
-            }
-        }
-    }
-
-    public static void startAlphaAnimation(View v, long duration, int visibility) {
-        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
-                ? new AlphaAnimation(0f, 1f)
-                : new AlphaAnimation(1f, 0f);
-
-        alphaAnimation.setDuration(duration);
-        alphaAnimation.setFillAfter(true);
-        v.startAnimation(alphaAnimation);
-    }
 }

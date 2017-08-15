@@ -58,7 +58,7 @@ public class Constants {
     public static final String SEARCH_CRITERIA = "SEARCH_CRITERIA";
     public static final String WINNER_ID = "WINNER_ID";
     public static final String WINNER_TYPE = "WINNER_TYPE";
-    public static int[][] SPEAKER_FETCH_OFFSET = {
+    public static final int[][] SPEAKER_FETCH_OFFSET = {
             {0, 0, 0},
             {0, 0, 0},
             {0, 0, 0},
@@ -69,6 +69,13 @@ public class Constants {
             0, 0
     };
 
+    public static final int EVENT_FETCH_SIZE = 20;
+    public static int EVENT_FETCH_OFFSET = 0;
+
     public static final String CONGRESS_TYPE = "CONGRESS_TYPE";
     public static final String SPEAKER_TYPE = "SPEAKER_TYPE";
+
+    public static final String MAIN_ACTIVITY = "MAIN_ACTIVITY";
+    public static final String CONGRESS_ACTIVITY = "CONGRESS_ACTIVITY";
+    public static final String SPEAKER_DETAIL_ACTIVITY = "SPEAKER_DETAIL_ACTIVITY";
 }

@@ -1,5 +1,7 @@
 package com.royan.twincongress.activities;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -7,12 +9,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.models.Speaker;
+import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.Picasso;
 
+import butterknife.ButterKnife;
 import io.realm.Realm;
 
 
@@ -34,14 +42,43 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
         setSupportActionBar(mToolbar);
 
         initDataModel();
-        initViews();
+//        initViews();
+        ButterKnife.bind(this);
         bindViewData();
         initCardViews(speaker.aabstract);
 
-        mAppBarLayout.addOnOffsetChangedListener(this);
-
         mToolbar.inflateMenu(R.menu.menu_speaker_detail);
-        startAlphaAnimation(mTitle, 0, View.INVISIBLE);
+        setupTapTarget();
+    }
+
+    private void setupTapTarget() {
+        if (SharedPreferencesHelper.getActivityTapTarget(this, Constants.SPEAKER_DETAIL_ACTIVITY))
+            return;
+
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(findViewById(R.id.menu_bookmark), "Bookmark", "Access to your bookmarks from side drawer")
+                        // All options below are optional
+                        .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                        .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                        .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(true)                   // Whether to tint the target view's color
+                        .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                        .targetRadius(40),                  // Specify the target radius (in dp)
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+                    }
+                });
     }
 
     protected void initDataModel() {
@@ -115,22 +152,30 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
     }
 
     protected void bindViewData() {
-        nameText.setText(speaker.name);
+//        nameText.setText(speaker.name);
         mTitle.setText(speaker.name);
-        subText.setText(speaker.email);
         if (speaker.avatar != null &&
                 speaker.avatar.length() != 0)
             Picasso.with(this)
                     .load(speaker.avatar)
+                    .transform(new CircleTransform())
                     .resize(110, 110)
                     .centerCrop()
+                    .placeholder(R.drawable.ic_landscape)
                     .into(avatar);
-        else
-            Picasso.with(this)
-                    .load(R.drawable.ic_landscape)
-                    .resize(110, 110)
-                    .centerCrop()
-                    .into(avatar);
+        else {
+            String letter = speaker.name.substring(0, 1);
+            if (speaker.name.startsWith("Prof") ||
+                    speaker.name.startsWith("prof") && speaker.name.length() > 6)
+                letter = speaker.name.substring(6, 7);
+            TextDrawable drawable = TextDrawable.builder()
+                    .beginConfig()
+                    .width(110)
+                    .height(110)
+                    .endConfig()
+                    .buildRound(letter, Color.RED);
+            avatar.setImageDrawable(drawable);
+        }
     }
 
     @Override

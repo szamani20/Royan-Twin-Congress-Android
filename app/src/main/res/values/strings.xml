@@ -122,6 +122,8 @@
     <string name="conclusion">Conclusion</string>
     <string name="keyword">Keyword</string>
     <string name="bookmark">Bookmark</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="navigation_drawer_text">Access agenda, companies, sponsors etc. here</string>
 
     <array name="congress_search_items">
         <item>Invited Speakers</item>

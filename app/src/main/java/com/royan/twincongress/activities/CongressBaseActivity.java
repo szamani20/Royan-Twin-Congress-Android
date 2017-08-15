@@ -2,6 +2,7 @@ package com.royan.twincongress.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -15,9 +16,13 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -27,6 +32,7 @@ import com.royan.twincongress.adapters.SpeakerAdapter;
 //import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.helpers.SnackBarHelper;
 import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
@@ -49,6 +55,123 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
     protected int congressType;
 
     protected abstract void initRecyclerView();
+
+    protected void setupTapTarget() {
+        if (SharedPreferencesHelper.getActivityTapTarget(this, Constants.CONGRESS_ACTIVITY))
+            return;
+
+        new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.menu_search), "Search")
+                                .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                                .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                                .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                                .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                                .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                                .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)                   // Whether to tint the target view's color
+                                .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                                .targetRadius(40),                  // Specify the target radius (in dp)
+                        TapTarget.forView(bottomBar.getTabAtPosition(0), "Invited Speaker")
+                                .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                                .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                                .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                                .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                                .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                                .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)                   // Whether to tint the target view's color
+                                .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                                .targetRadius(40),
+                        TapTarget.forView(bottomBar.getTabAtPosition(1), "Oral Presentation")
+                                .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                                .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                                .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                                .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                                .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                                .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)                   // Whether to tint the target view's color
+                                .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                                .targetRadius(40),
+                        TapTarget.forView(bottomBar.getTabAtPosition(2), "Poster")
+                                .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                                .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                                .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                                .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                                .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                                .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true)                   // Whether to tint the target view's color
+                                .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                                .targetRadius(40)
+                ).listener(new TapTargetSequence.Listener() {
+            // This listener will tell us when interesting(tm) events happen in regards
+            // to the sequence
+            @Override
+            public void onSequenceFinish() {
+                // Yay
+            }
+
+            @Override
+            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+
+            }
+
+            @Override
+            public void onSequenceCanceled(TapTarget lastTarget) {
+                // Boo
+            }
+        }).start();
+
+//        TapTargetView.showFor(this,                 // `this` is an Activity
+//                TapTarget.forView(findViewById(R.id.menu_search),
+//                        getResources().getString(R.string.navigation_drawer),
+//                        getResources().getString(R.string.navigation_drawer_text))
+//                        // All options below are optional
+//                        .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+//                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+//                        .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+//                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+//                        .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+//                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+//                        .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+//                        .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+//                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+//                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+//                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+//                        .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
+//                        .tintTarget(true)                   // Whether to tint the target view's color
+//                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+//                        .targetRadius(60),                  // Specify the target radius (in dp)
+//                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+//                    @Override
+//                    public void onTargetClick(TapTargetView view) {
+//                        super.onTargetClick(view);      // This call is optional
+//                    }
+//                });
+    }
 
     protected void initModels() {
         populateOP();

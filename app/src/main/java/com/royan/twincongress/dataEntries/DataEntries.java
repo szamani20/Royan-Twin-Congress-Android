@@ -1,6 +1,7 @@
 package com.royan.twincongress.dataEntries;
 
 import com.royan.twincongress.models.Company;
+import com.royan.twincongress.models.Event;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.models.Winner;
 
@@ -32,4 +33,5 @@ public class DataEntries {
     public static List<Company> Ordinary_Company;
     public static List<Company> Sponsor_Company;
 
+    public static List<Event> events;
 }

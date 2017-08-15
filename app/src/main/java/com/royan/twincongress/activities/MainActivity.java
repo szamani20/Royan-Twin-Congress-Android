@@ -1,13 +1,17 @@
 package com.royan.twincongress.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -18,14 +22,23 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.royan.twincongress.R;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.SharedPreferencesHelper;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.royan.twincongress.helpers.SnackBarHelper.showSnackbar;
 
 public class MainActivity extends AppCompatActivity {
-    private CardView SCCCardView;
-    private CardView RBCCardView;
-    private CardView AKPCardView;
-    private CardView nurseCardView;
+    @BindView(R.id.SCCCardView)
+    CardView SCCCardView;
+    @BindView(R.id.RBCCardView)
+    CardView RBCCardView;
+    @BindView(R.id.nurseCardView)
+    CardView AKPCardView;
+    @BindView(R.id.AKPCardView)
+    CardView nurseCardView;
     private Drawer drawer;
 
     @Override
@@ -36,43 +49,63 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
+        ButterKnife.bind(this);
         setupDrawer(toolbar);
-        initViews();
+        setupTapTarget();
     }
 
-    private void initViews() {
-        SCCCardView = (CardView) findViewById(R.id.SCCCardView);
-        RBCCardView = (CardView) findViewById(R.id.RBCCardView);
-        nurseCardView = (CardView) findViewById(R.id.nurseCardView);
-        AKPCardView = (CardView) findViewById(R.id.AKPCardView);
+    private void setupTapTarget() {
+        if (SharedPreferencesHelper.getActivityTapTarget(this, Constants.MAIN_ACTIVITY))
+            return;
 
-        SCCCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SCCActivity.class));
-            }
-        });
+        TextView tapTargetView = (TextView) findViewById(R.id.tapTargetView);
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forView(tapTargetView,
+                        getResources().getString(R.string.navigation_drawer),
+                        getResources().getString(R.string.navigation_drawer_text))
+                        // All options below are optional
+                        .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                        .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
+                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextColor(R.color.scc_color)      // Specify the color of the title text
+                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
+                        .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
+                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(true)                   // Whether to tint the target view's color
+                        .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                        .targetRadius(40),                  // Specify the target radius (in dp)
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+                        drawer.openDrawer();
+                    }
+                });
+    }
 
-        RBCCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RBCActivity.class));
-            }
-        });
+    @OnClick(R.id.SCCCardView)
+    public void startScc() {
+        startActivity(new Intent(MainActivity.this, SCCActivity.class));
+    }
 
-        nurseCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NurseActivity.class));
-            }
-        });
+    @OnClick(R.id.RBCCardView)
+    public void startRbc() {
+        startActivity(new Intent(MainActivity.this, RBCActivity.class));
+    }
 
-        AKPCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AwardActivity.class));
-            }
-        });
+    @OnClick(R.id.nurseCardView)
+    public void startNc() {
+        startActivity(new Intent(MainActivity.this, NurseActivity.class));
+    }
+
+    @OnClick(R.id.AKPCardView)
+    public void startAkp() {
+        startActivity(new Intent(MainActivity.this, AwardActivity.class));
     }
 
     private void setupDrawer(Toolbar toolbar) {
@@ -129,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
                                 break;
                             case Constants.ITEM_AGENDA:
-                                showSnackbar(MainActivity.this, view, "agenda", Snackbar.LENGTH_SHORT);
+                                startActivity(new Intent(MainActivity.this, AgendaActivity.class));
                                 break;
                             case Constants.ITEM_COMPANIES:
                                 startActivity(new Intent(MainActivity.this, CompanyActivity.class));

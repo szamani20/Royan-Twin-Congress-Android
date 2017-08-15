@@ -38,8 +38,10 @@ public class CompanyActivity extends CompanyBaseActivity {
         toolbar.setTitle(R.string.companies);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         if (realm == null)
             realm = Realm.getDefaultInstance();

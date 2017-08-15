@@ -1,16 +1,20 @@
 package com.royan.twincongress.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.models.Winner;
+import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.Picasso;
 
+import butterknife.ButterKnife;
 import io.realm.Realm;
 
 /**
@@ -30,14 +34,12 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
         setSupportActionBar(mToolbar);
 
         initDataModel();
-        initViews();
+//        initViews();
+        ButterKnife.bind(this);
         bindViewData();
         initCardViews(winner.aabstract);
 
-        mAppBarLayout.addOnOffsetChangedListener(this);
-
         mToolbar.inflateMenu(R.menu.menu_speaker_detail);
-        startAlphaAnimation(mTitle, 0, View.INVISIBLE);
     }
 
     @Override
@@ -78,21 +80,30 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
 
     @Override
     protected void bindViewData() {
-        nameText.setText(winner.name);
+//        nameText.setText(winner.name);
         mTitle.setText(winner.name);
-        subText.setText(winner.email);
+
         if (winner.avatar != null &&
                 winner.avatar.length() != 0)
             Picasso.with(this)
                     .load(winner.avatar)
+                    .transform(new CircleTransform())
                     .resize(110, 110)
                     .centerCrop()
+                    .placeholder(R.drawable.ic_landscape)
                     .into(avatar);
-        else
-            Picasso.with(this)
-                    .load(R.drawable.ic_landscape)
-                    .resize(110, 110)
-                    .centerCrop()
-                    .into(avatar);
+        else {
+            String letter = winner.name.substring(0, 1);
+            if (winner.name.startsWith("Prof") ||
+                    winner.name.startsWith("prof") && winner.name.length() > 6)
+                letter = winner.name.substring(6, 7);
+            TextDrawable drawable = TextDrawable.builder()
+                    .beginConfig()
+                    .width(110)
+                    .height(110)
+                    .endConfig()
+                    .buildRound(letter, Color.RED);
+            avatar.setImageDrawable(drawable);
+        }
     }
 }

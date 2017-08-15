@@ -27,6 +27,22 @@ public class SharedPreferencesHelper {
         return preferences.getBoolean(VERIFICATION_KEY, true);
     }
 
+    public static boolean getActivityTapTarget(Context context, final String activityName) {
+        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, 0);
+
+        if (!preferences.contains(activityName)) {
+            System.out.println("SHARED");
+            Editor editor = preferences.edit();
+            editor.putBoolean(activityName, true);
+            editor.apply();
+
+            return false;
+        }
+
+        System.out.println("PREFERENCES");
+        return preferences.getBoolean(activityName, true);
+    }
+
     public static boolean getDataDownloaded(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, 0);
 

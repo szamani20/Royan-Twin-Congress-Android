@@ -2,6 +2,7 @@ package com.royan.twincongress.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.activities.SpeakerDetailActivity;
 import com.royan.twincongress.activities.WinnerDetailActivity;
@@ -19,9 +21,13 @@ import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.helpers.RandomHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Winner;
+import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by szamani on 7/31/2017.
@@ -60,14 +66,20 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
         if (winner.avatar != null &&
                 winner.avatar.length() != 0)
             Picasso.with(context).load(winner.avatar)
+                    .transform(new CircleTransform())
                     .resize(120, 120)
                     .centerCrop()
                     .placeholder(R.drawable.ic_landscape)
                     .into(holder.winnerAvatar);
-        else Picasso.with(context).load(R.drawable.ic_landscape)
-                .resize(120, 120)
-                .centerCrop()
-                .into(holder.winnerAvatar);
+        else {
+            String letter = winner.name.substring(0, 1);
+            if (winner.name.startsWith("Prof") ||
+                    winner.name.startsWith("prof") && winner.name.length() > 6)
+                letter = winner.name.substring(6, 7);
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(letter, Color.RED);
+            holder.winnerAvatar.setImageDrawable(drawable);
+        }
 
         holder.winnerCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,29 +98,20 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
     }
 
     class WinnerViewHolder extends RecyclerView.ViewHolder {
-        ImageView winnerAvatar;
-        TextView winnerName;
-        TextView winnerEmail;
-        TextView winnerCountry;
-        TextView awardTime;
-        TextView awardVenue;
-        TextView winnerAffiliation;
-        TextView winnerShortCV;
-        CardView winnerCardView;
-        LinearLayout topBorder;
+        @BindView(R.id.winnerAvatar) ImageView winnerAvatar;
+        @BindView(R.id.winnerName) TextView winnerName;
+        @BindView(R.id.winnerEmail) TextView winnerEmail;
+        @BindView(R.id.winnerCountry) TextView winnerCountry;
+        @BindView(R.id.awardTime) TextView awardTime;
+        @BindView(R.id.awardVenue) TextView awardVenue;
+        @BindView(R.id.winnerAffiliation) TextView winnerAffiliation;
+        @BindView(R.id.winnerShortCV) TextView winnerShortCV;
+        @BindView(R.id.winnerCardView) CardView winnerCardView;
+        @BindView(R.id.topBorder) LinearLayout topBorder;
 
         public WinnerViewHolder(View itemView) {
             super(itemView);
-            winnerAvatar = (ImageView) itemView.findViewById(R.id.winnerAvatar);
-            winnerName = (TextView) itemView.findViewById(R.id.winnerName);
-            winnerEmail = (TextView) itemView.findViewById(R.id.winnerEmail);
-            winnerCountry = (TextView) itemView.findViewById(R.id.winnerCountry);
-            awardTime = (TextView) itemView.findViewById(R.id.awardTime);
-            awardVenue = (TextView) itemView.findViewById(R.id.awardVenue);
-            winnerAffiliation = (TextView) itemView.findViewById(R.id.winnerAffiliation);
-            winnerShortCV = (TextView) itemView.findViewById(R.id.winnerShortCV);
-            winnerCardView = (CardView) itemView.findViewById(R.id.winnerCardView);
-            topBorder = (LinearLayout) itemView.findViewById(R.id.topBorder);
+            ButterKnife.bind(this, itemView);
 
             topBorder.setBackgroundColor(context.getResources().getIntArray(R.array.top_bar_colors)[
                     RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)]);

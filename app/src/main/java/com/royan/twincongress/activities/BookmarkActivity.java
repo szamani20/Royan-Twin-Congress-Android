@@ -16,6 +16,8 @@ import com.royan.twincongress.models.Speaker;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 
@@ -24,9 +26,9 @@ import io.realm.Realm;
  */
 
 public class BookmarkActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    @BindView(R.id.speakerBookmarkRView) RecyclerView recyclerView;
+    @BindView(R.id.noResultText) AwesomeTextView noResultText;
     private SpeakerAdapter adapter;
-    private AwesomeTextView noResultText;
     private List<Speaker> bookmarks;
     private Realm realm;
 
@@ -34,9 +36,11 @@ public class BookmarkActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(R.string.bookmarks);
 
         initBookmarks();
-        initViews();
+        ButterKnife.bind(this);
         initRecyclerView();
     }
 
@@ -71,11 +75,6 @@ public class BookmarkActivity extends AppCompatActivity {
             if (bookmarks.size() == 0 && noResultText != null)
                 noResultText.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void initViews() {
-        noResultText = (AwesomeTextView) findViewById(R.id.noResultText);
-        recyclerView = (RecyclerView) findViewById(R.id.speakerBookmarkRView);
     }
 
     private void initRecyclerView() {

@@ -16,11 +16,13 @@ import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.royan.twincongress.R;
 import com.royan.twincongress.connections.FetchCompany;
 import com.royan.twincongress.connections.FetchCongress;
+import com.royan.twincongress.connections.FetchEvent;
 import com.royan.twincongress.connections.FetchWinners;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.interfaces.OnFirstDownloadTaskListener;
 import com.royan.twincongress.models.Abstract;
 import com.royan.twincongress.models.Company;
+import com.royan.twincongress.models.Event;
 import com.royan.twincongress.models.RealmString;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.models.Winner;
@@ -28,6 +30,9 @@ import com.royan.twincongress.models.Winner;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmList;
 
@@ -38,8 +43,10 @@ import static com.royan.twincongress.helpers.SnackBarHelper.showSnackbar;
  */
 
 public class FirstDownloadActivity extends AppCompatActivity implements OnFirstDownloadTaskListener {
-    private BootstrapButton downloadButton;
-    private BootstrapProgressBar downloadProgressBar;
+    @BindView(R.id.downloadButton)
+    BootstrapButton downloadButton;
+    @BindView(R.id.downloadProgressBar)
+    BootstrapProgressBar downloadProgressBar;
     Realm realm;
 
     @Override
@@ -47,7 +54,7 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_download);
         realm = Realm.getDefaultInstance();
-        initViews();
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -57,22 +64,15 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
 //            realm.close();
     }
 
-    private void initViews() {
-        downloadButton = (BootstrapButton) findViewById(R.id.downloadButton);
-        downloadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Boolean isConnected = checkForInternet();
-                if (!isConnected)
-                    showSnackbar(FirstDownloadActivity.this, v, "Update", Snackbar.LENGTH_SHORT);
-                else {
-                    downloadButton.setEnabled(false);
-                    new FirstDownloadTask(FirstDownloadActivity.this).execute();
-                }
-            }
-        });
-
-        downloadProgressBar = (BootstrapProgressBar) findViewById(R.id.downloadProgressBar);
+    @OnClick(R.id.downloadButton)
+    public void downloadAction(View v) {
+        final Boolean isConnected = checkForInternet();
+        if (!isConnected)
+            showSnackbar(FirstDownloadActivity.this, v, "Update", Snackbar.LENGTH_SHORT);
+        else {
+            downloadButton.setEnabled(false);
+            new FirstDownloadTask(FirstDownloadActivity.this).execute();
+        }
     }
 
     private class FirstDownloadTask extends AsyncTask<Void, Integer, Void> {
@@ -80,6 +80,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
         private List<List<Speaker>> congressData;
         private List<List<Winner>> winnersData;
         private List<List<Company>> companiesData;
+        private List<Event> eventsData;
+
 
         FirstDownloadTask(OnFirstDownloadTaskListener listener) {
             this.listener = listener;
@@ -102,6 +104,9 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                 publishProgress(i + 11);
             }
 
+            eventsData = new FetchEvent().getEventsAll();
+            publishProgress(13);
+
             return null;
         }
 
@@ -110,18 +115,20 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
             congressData = new ArrayList<>();
             winnersData = new ArrayList<>();
             companiesData = new ArrayList<>();
+//            eventsData = new ArrayList<>(); // not necessary
             downloadProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             downloadProgressBar.setVisibility(View.GONE);
-            listener.onSpeakerFetchTaskCompleted(congressData, winnersData, companiesData);
+            listener.onSpeakerFetchTaskCompleted(congressData, winnersData,
+                    companiesData, eventsData);
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            downloadProgressBar.setProgress((int) ((((float) values[0] / 12.0)) * 100));
+            downloadProgressBar.setProgress((int) ((((float) values[0] / 13.0)) * 100));
         }
     }
 
@@ -139,7 +146,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
     @Override
     public void onSpeakerFetchTaskCompleted(final List<List<Speaker>> speakerList,
                                             final List<List<Winner>> winnerList,
-                                            final List<List<Company>> companiesList) {
+                                            final List<List<Company>> companiesList,
+                                            final List<Event> eventList) {
         System.out.println("Finished");
 
         realm.executeTransactionAsync(new Realm.Transaction() {
@@ -228,6 +236,18 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                     }
                 }
 
+                for (int i = 0; i < eventList.size(); i++) {
+                    Event event = realm.createObject(Event.class);
+
+                    event.id = eventList.get(i).id;
+                    event.name = eventList.get(i).name;
+                    event.topic = eventList.get(i).topic;
+                    event.time = eventList.get(i).time;
+                    event.venue = eventList.get(i).venue;
+
+                    System.out.println(event.id + " " +
+                            event.name + " " + event.topic);
+                }
 
             }
         });

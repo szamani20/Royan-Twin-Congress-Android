@@ -16,6 +16,10 @@ import com.royan.twincongress.connections.FetchCongress;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * Created by szamani on 7/25/2017.
@@ -23,35 +27,27 @@ import com.royan.twincongress.helpers.SharedPreferencesHelper;
 
 public class VerificationActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "VERIFICATION_ACTIVITY_PREFS";
-    private BootstrapEditText verificationEditText;
-    private BootstrapButton verifyButton;
+    @BindView(R.id.verificationEditText)
+    BootstrapEditText verificationEditText;
+    @BindView(R.id.verifyButton)
+    BootstrapButton verifyButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
-        initViews();
-        setViewActions();
+        ButterKnife.bind(this);
     }
 
-    private void initViews() {
-        verificationEditText = (BootstrapEditText) findViewById(R.id.verificationEditText);
-        verifyButton = (BootstrapButton) findViewById(R.id.verifyButton);
-    }
+    @OnClick(R.id.verifyButton)
+    public void verifyAction() {
+        String verificationCode = verificationEditText.getText().toString().trim();
 
-    private void setViewActions() {
-        verifyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String verificationCode = verificationEditText.getText().toString().trim();
-
-                if (SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))
-                    startActivity(new Intent(VerificationActivity.this, MainActivity.class));
-                else
-                    startActivity(new Intent(VerificationActivity.this, FirstDownloadActivity.class));
-            }
-        });
+        if (SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))
+            startActivity(new Intent(VerificationActivity.this, MainActivity.class));
+        else
+            startActivity(new Intent(VerificationActivity.this, FirstDownloadActivity.class));
     }
 
     public void showSnackbar(View view, String message, int duration) {

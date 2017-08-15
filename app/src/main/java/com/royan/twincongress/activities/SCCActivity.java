@@ -1,6 +1,7 @@
 package com.royan.twincongress.activities;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -9,12 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
 //import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.helpers.SnackBarHelper;
 import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
@@ -59,6 +64,7 @@ public class SCCActivity extends CongressBaseActivity {
         initViews();
 
         toolbar.inflateMenu(R.menu.menu_search);
+        setupTapTarget();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.royan.twincongress.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,12 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.models.Company;
 import com.royan.twincongress.models.DataType;
+import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by szamani on 8/5/2017.
@@ -44,30 +50,26 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
 
     @Override
     public void onBindViewHolder(CompanyViewHolder holder, int position) {
-        holder.companyName.setText(companies.get(position).name);
-        holder.companyWebsite.setText(companies.get(position).website);
-        holder.companyPhone.setText(companies.get(position).phone);
-        holder.companyLocation.setText(companies.get(position).location);
-        holder.companyAddress.setText(companies.get(position).address);
+        final Company company = companies.get(position);
+        holder.companyName.setText(company.name);
+        holder.companyWebsite.setText(company.website);
+        holder.companyPhone.setText(company.phone);
+        holder.companyLocation.setText(company.location);
+        holder.companyAddress.setText(company.address);
 
-        if (companies.get(position).logo != null &&
-                companies.get(position).logo.length() != 0)
-            Picasso.with(context).load(companies.get(position).logo)
+        if (company.logo != null &&
+                company.logo.length() != 0)
+            Picasso.with(context).load(company.logo)
+                    .transform(new CircleTransform())
                     .resize(120, 120)
                     .centerCrop()
                     .placeholder(R.drawable.ic_landscape)
                     .into(holder.companyLogo);
-        else Picasso.with(context).load(R.drawable.ic_landscape)
-                .resize(120, 120)
-                .centerCrop()
-                .into(holder.companyLogo);
-
-//        holder.companyGalleryRView.setLayoutManager(
-//                new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//        );
-//        GalleryHorizontalAdapter adapter =
-//                new GalleryHorizontalAdapter(context, companies.get(position).pics);
-//        holder.companyGalleryRView.setAdapter(adapter);
+        else {
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(company.name.substring(0, 1), Color.RED);
+            holder.companyLogo.setImageDrawable(drawable);
+        }
     }
 
     @Override
@@ -76,25 +78,22 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     }
 
     class CompanyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.companyLogo)
         ImageView companyLogo;
+        @BindView(R.id.companyName)
         TextView companyName;
+        @BindView(R.id.companyWebsite)
         TextView companyWebsite;
+        @BindView(R.id.companyPhone)
         TextView companyPhone;
+        @BindView(R.id.companyLocation)
         TextView companyLocation;
+        @BindView(R.id.companyAddress)
         TextView companyAddress;
-//        RecyclerView companyGalleryRView;
 
         public CompanyViewHolder(View itemView) {
             super(itemView);
-            companyLogo = (ImageView) itemView.findViewById(R.id.companyLogo);
-            companyName = (TextView) itemView.findViewById(R.id.companyName);
-            companyWebsite = (TextView) itemView.findViewById(R.id.companyWebsite);
-            companyPhone = (TextView) itemView.findViewById(R.id.companyPhone);
-            companyLocation = (TextView) itemView.findViewById(R.id.companyLocation);
-            companyAddress = (TextView) itemView.findViewById(R.id.companyAddress);
-//            companyGalleryRView = (RecyclerView)
-//                    itemView.findViewById(R.id.companyGalleryRView);
-
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
