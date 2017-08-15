@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.getkeepsafe.taptargetview.TapTarget;
@@ -42,7 +41,6 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
         setSupportActionBar(mToolbar);
 
         initDataModel();
-//        initViews();
         ButterKnife.bind(this);
         bindViewData();
         initCardViews(speaker.aabstract);

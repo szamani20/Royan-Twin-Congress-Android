@@ -1,13 +1,10 @@
 package com.royan.twincongress.activities;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.royan.twincongress.R;
@@ -17,7 +14,6 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.royan.twincongress.helpers.Constants.ABSTRACT_SIZE;
 import static com.royan.twincongress.helpers.Constants.BACKGROUND;
 import static com.royan.twincongress.helpers.Constants.CONCLUSION;
 import static com.royan.twincongress.helpers.Constants.KEYWORD;
@@ -36,21 +32,10 @@ public abstract class PersonDetailBaseActivity extends AppCompatActivity {
     @BindViews({R.id.backgroundSection, R.id.objectiveSection, R.id.methodSection,
             R.id.resultSection, R.id.conclusionSection, R.id.keywordSection})
     CardView[] cardViews;
-//    @BindView(R.id.nameText)
-//    TextView nameText;
     @BindView(R.id.avatar)
     CircleImageView avatar;
 
     protected void initCardViews(Abstract aabstract) {
-//        if (cardViews == null)
-//            cardViews = new CardView[ABSTRACT_SIZE];
-//        cardViews[BACKGROUND] = (CardView) findViewById(R.id.backgroundSection);
-//        cardViews[OBJECTIVE] = (CardView) findViewById(R.id.objectiveSection);
-//        cardViews[METHOD] = (CardView) findViewById(R.id.methodSection);
-//        cardViews[RESULT] = (CardView) findViewById(R.id.resultSection);
-//        cardViews[CONCLUSION] = (CardView) findViewById(R.id.conclusionSection);
-//        cardViews[KEYWORD] = (CardView) findViewById(R.id.keywordSection);
-
         if (aabstract.background != null &&
                 aabstract.background.length() != 0) {
             TextView sectionTitle = (TextView) cardViews[BACKGROUND].findViewById(R.id.sectionTitle);

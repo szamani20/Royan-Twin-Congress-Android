@@ -9,8 +9,8 @@ import android.content.SharedPreferences.Editor;
  */
 
 public class SharedPreferencesHelper {
-    public static final String VERIFICATION_KEY = "VERIFICATION_KEY";
-    public static final String DATA_DOWNLOADED_KEY = "DATA_DOWNLOAD";
+    private static final String VERIFICATION_KEY = "VERIFICATION_KEY";
+    private static final String DATA_DOWNLOADED_KEY = "DATA_DOWNLOAD";
     private static final String PREF_NAME = "SharedPreferencesHelper";
 
     public static boolean getVerified(Context context) {
@@ -31,7 +31,6 @@ public class SharedPreferencesHelper {
         SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, 0);
 
         if (!preferences.contains(activityName)) {
-            System.out.println("SHARED");
             Editor editor = preferences.edit();
             editor.putBoolean(activityName, true);
             editor.apply();
@@ -39,7 +38,6 @@ public class SharedPreferencesHelper {
             return false;
         }
 
-        System.out.println("PREFERENCES");
         return preferences.getBoolean(activityName, true);
     }
 

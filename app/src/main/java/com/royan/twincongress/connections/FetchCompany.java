@@ -8,7 +8,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.royan.twincongress.helpers.StringRealmListConverter;
 import com.royan.twincongress.models.Company;
 import com.royan.twincongress.models.FetchBodyRequest;
 import com.royan.twincongress.models.RealmString;

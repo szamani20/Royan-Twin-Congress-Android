@@ -38,6 +38,7 @@ public class Constants {
     public static final String SPEAKER = "speaker";
     public static final String WINNER = "winner";
     public static final String COMPANY = "company";
+    public static final String EVENT = "event";
 
     public static final String SCC = "scc";
     public static final String RBC = "rbc";

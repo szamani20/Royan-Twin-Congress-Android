@@ -12,11 +12,11 @@ import okhttp3.Response;
  * Created by szamani on 8/5/2017.
  */
 
-public class FetchHelper {
-    public static final MediaType JSON
+class FetchHelper {
+    private static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
-    public static String getUrlString(String url) throws IOException {
+    static String getUrlString(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -27,7 +27,7 @@ public class FetchHelper {
         return response.body().string();
     }
 
-    public static String postUrlString(String url, String json) throws IOException {
+    static String postUrlString(String url, String json) throws IOException {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()

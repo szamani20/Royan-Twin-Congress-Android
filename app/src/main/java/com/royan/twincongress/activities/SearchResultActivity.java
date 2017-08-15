@@ -26,8 +26,6 @@ import io.realm.Realm;
  */
 
 public class SearchResultActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private SpeakerAdapter adapter;
     private String searchCriteria;
     private int congressType;
     private Realm realm;
@@ -42,9 +40,6 @@ public class SearchResultActivity extends AppCompatActivity {
         if (searchCriteria == null)
             searchCriteria = "NOTHING";
 
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
-
         initSearchResults();
     }
 
@@ -54,7 +49,6 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private void initRecyclerView(List<Speaker> searchResults) {
         if (searchResults == null) {
-            System.out.println("OREALLY?");
             AwesomeTextView noResultText = (AwesomeTextView) findViewById(R.id.noResultText);
             noResultText.setVisibility(View.VISIBLE);
             return;
@@ -62,9 +56,8 @@ public class SearchResultActivity extends AppCompatActivity {
         AwesomeTextView noResultText = (AwesomeTextView) findViewById(R.id.noResultText);
         noResultText.setVisibility(View.GONE);
 
-        recyclerView = (RecyclerView) findViewById(R.id.speakerResultRView);
-        System.out.println("BEFORRRE " + congressType);
-        adapter = new SpeakerAdapter(this, searchResults,
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.speakerResultRView);
+        SpeakerAdapter adapter = new SpeakerAdapter(this, searchResults,
                 DataType.Search);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,6 +69,9 @@ public class SearchResultActivity extends AppCompatActivity {
                 searchCriteria.length() < 2 ||
                 searchCriteria.length() > 30)
             return null;
+
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
 
         OrderedRealmCollection<Speaker> speakers =
                 realm.where(Speaker.class)

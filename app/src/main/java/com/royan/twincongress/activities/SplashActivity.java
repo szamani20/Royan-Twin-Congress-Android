@@ -10,8 +10,6 @@ import com.royan.twincongress.helpers.SharedPreferencesHelper;
  */
 
 public class SplashActivity extends AppCompatActivity {
-    private static final String PREFS_NAME = "SPLASH_ACTIVITY_PREFS";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

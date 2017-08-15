@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
@@ -34,7 +33,6 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
         setSupportActionBar(mToolbar);
 
         initDataModel();
-//        initViews();
         ButterKnife.bind(this);
         bindViewData();
         initCardViews(winner.aabstract);
@@ -80,7 +78,6 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
 
     @Override
     protected void bindViewData() {
-//        nameText.setText(winner.name);
         mTitle.setText(winner.name);
 
         if (winner.avatar != null &&

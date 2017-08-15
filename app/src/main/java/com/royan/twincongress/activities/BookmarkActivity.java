@@ -10,7 +10,6 @@ import android.view.View;
 import com.beardedhen.androidbootstrap.AwesomeTextView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
-import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.models.Speaker;
 
 import java.util.ArrayList;
@@ -45,10 +44,10 @@ public class BookmarkActivity extends AppCompatActivity {
     }
 
     private void initBookmarks() {
-        bookmarks = new ArrayList<>();
-
         if (realm == null)
             realm = Realm.getDefaultInstance();
+
+        bookmarks = new ArrayList<>();
 
         // TODO: boundary or limit result count
         OrderedRealmCollection<Speaker> speakers =
@@ -94,7 +93,6 @@ public class BookmarkActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("ANYONE?");
         initBookmarks();
     }
 }

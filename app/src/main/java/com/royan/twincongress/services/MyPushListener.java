@@ -6,9 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.royan.twincongress.connections.FetchCompany;
 import com.royan.twincongress.connections.FetchCongress;
+import com.royan.twincongress.connections.FetchEvent;
 import com.royan.twincongress.connections.FetchWinners;
 import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.models.Company;
+import com.royan.twincongress.models.Event;
 import com.royan.twincongress.models.PushedData;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.models.Winner;
@@ -62,8 +64,49 @@ public class MyPushListener extends PusheListenerService {
             case Constants.COMPANY:
                 changeCompany(data);
                 break;
+            case Constants.EVENT:
+                changeEvent(data);
+                break;
         }
 
+    }
+
+    private void changeEvent(PushedData data) {
+        new FetchEventTask(data.id).execute();
+    }
+
+    private class FetchEventTask extends AsyncTask<Void, Integer, Void> {
+        private Event fetched_event;
+        private int id;
+
+        FetchEventTask(int id) {
+            this.id = id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // TODO check for null
+            fetched_event = new FetchEvent().getEventRange(id, id).get(0);
+            System.out.println("########################");
+            System.out.println(fetched_event.name);
+            Realm realm = Realm.getDefaultInstance();
+            realm.executeTransactionAsync(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    Event event = realm
+                            .where(Event.class)
+                            .equalTo("id", id)
+                            .findFirst();
+                    if (event != null) {
+                        event.name = fetched_event.name;
+                        event.topic = fetched_event.topic;
+                        event.time = fetched_event.time;
+                        event.venue = fetched_event.venue;
+                    }
+                }
+            });
+            return null;
+        }
     }
 
     private void changeCompany(PushedData data) {

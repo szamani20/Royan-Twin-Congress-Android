@@ -2,19 +2,14 @@ package com.royan.twincongress.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
-//import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
-import com.royan.twincongress.helpers.SnackBarHelper;
-import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -42,11 +37,10 @@ public class NurseActivity extends CongressBaseActivity {
         toolbar.setTitle(R.string.nurse_congress);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         congressType = 2;
         initDefaultTabModels();
@@ -60,7 +54,6 @@ public class NurseActivity extends CongressBaseActivity {
     @Override
     protected void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.speakerRView);
-//        adapter = new SpeakerRealmAdapter(this, DataEntries.Nurse_IS_Speaker, DataType.InvitedSpeaker);
         adapter = new SpeakerAdapter(this, DataEntries.Nurse_IS_Speaker,
                 DataType.InvitedSpeaker);
         recyclerView.setAdapter(adapter);
@@ -143,6 +136,8 @@ public class NurseActivity extends CongressBaseActivity {
 
     @Override
     protected void fetchData(int congress, int type) {
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
         OrderedRealmCollection<Speaker> speakers =
                 realm.where(Speaker.class)
                         .equalTo("congress", congress)
@@ -225,6 +220,9 @@ public class NurseActivity extends CongressBaseActivity {
                 searchCriteria.length() < 2 ||
                 searchCriteria.length() > 30)
             return;
+
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
 
         DataEntries.Nurse_Search_Result =
                 realm.where(Speaker.class)

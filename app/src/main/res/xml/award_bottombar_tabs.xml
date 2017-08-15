@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
+
     <tab
         icon="@drawable/ic_trending_down_black_24dp"
         id="@+id/tab_in"
         title="International Winners" />
+
     <tab
         icon="@drawable/ic_trending_up_black_24dp"
         id="@+id/tab_n"

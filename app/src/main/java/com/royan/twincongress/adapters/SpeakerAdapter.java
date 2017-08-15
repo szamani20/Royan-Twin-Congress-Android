@@ -123,7 +123,7 @@ public class SpeakerAdapter extends
         @BindView(R.id.topBorder)
         LinearLayout topBorder;
 
-        public SpeakerViewHolder(View itemView) {
+        SpeakerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             topBorder.setBackgroundColor(context.getResources().getIntArray(R.array.top_bar_colors)[

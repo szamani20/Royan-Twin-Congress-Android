@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="75dp" />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

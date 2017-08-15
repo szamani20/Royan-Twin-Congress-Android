@@ -24,7 +24,6 @@ import static com.royan.twincongress.helpers.Constants.EVENT_FETCH_SIZE;
  */
 
 public class AgendaActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private AgendaAdapter adapter;
     private Realm realm;
 
@@ -40,7 +39,7 @@ public class AgendaActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.agendaRView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.agendaRView);
         adapter = new AgendaAdapter(DataEntries.events, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

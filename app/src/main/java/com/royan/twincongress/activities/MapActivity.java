@@ -13,14 +13,13 @@ import com.royan.twincongress.R;
  */
 
 public class MapActivity extends AppCompatActivity {
-    private SubsamplingScaleImageView mapImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        mapImage = (SubsamplingScaleImageView) findViewById(R.id.mapImage);
+        SubsamplingScaleImageView mapImage = (SubsamplingScaleImageView) findViewById(R.id.mapImage);
         mapImage.setImage(ImageSource.resource(R.drawable.westeros));
     }
 }

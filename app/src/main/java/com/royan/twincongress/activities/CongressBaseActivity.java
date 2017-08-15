@@ -5,42 +5,26 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.royan.twincongress.R;
-//import com.royan.twincongress.adapters.SpeakerAdapter;
 import com.royan.twincongress.adapters.SpeakerAdapter;
-//import com.royan.twincongress.adapters.SpeakerRealmAdapter;
-import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
-import com.royan.twincongress.helpers.SnackBarHelper;
-import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
-import com.royan.twincongress.models.Speaker;
-
-import java.util.List;
-
-import io.realm.Realm;
 
 /**
  * Created by szamani on 7/27/2017.
@@ -144,33 +128,6 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
                 // Boo
             }
         }).start();
-
-//        TapTargetView.showFor(this,                 // `this` is an Activity
-//                TapTarget.forView(findViewById(R.id.menu_search),
-//                        getResources().getString(R.string.navigation_drawer),
-//                        getResources().getString(R.string.navigation_drawer_text))
-//                        // All options below are optional
-//                        .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
-//                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
-//                        .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
-//                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
-//                        .titleTextColor(R.color.scc_color)      // Specify the color of the title text
-//                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
-//                        .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
-//                        .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
-//                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
-//                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
-//                        .drawShadow(true)                   // Whether to draw a drop shadow or not
-//                        .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
-//                        .tintTarget(true)                   // Whether to tint the target view's color
-//                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-//                        .targetRadius(60),                  // Specify the target radius (in dp)
-//                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
-//                    @Override
-//                    public void onTargetClick(TapTargetView view) {
-//                        super.onTargetClick(view);      // This call is optional
-//                    }
-//                });
     }
 
     protected void initModels() {
@@ -289,5 +246,4 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
     }
 
     protected abstract void performSearch();
-
 }

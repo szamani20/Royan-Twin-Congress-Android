@@ -1,27 +1,15 @@
 package com.royan.twincongress.activities;
 
-import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.TextView;
 
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
-//import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
-import com.royan.twincongress.helpers.SharedPreferencesHelper;
-import com.royan.twincongress.helpers.SnackBarHelper;
-import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -49,13 +37,10 @@ public class SCCActivity extends CongressBaseActivity {
         toolbar.setTitle(R.string.stem_cell_congress);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        System.out.println("HELLO ON_CREATE 1");
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
-        System.out.println("HELLO ON_CREATE 2");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         congressType = 0;
         initDefaultTabModels();
@@ -149,6 +134,9 @@ public class SCCActivity extends CongressBaseActivity {
 
     @Override
     protected void fetchData(int congress, int type) {
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
+
         // only on initializing and load more
         OrderedRealmCollection<Speaker> speakers =
                 realm.where(Speaker.class)
@@ -246,6 +234,9 @@ public class SCCActivity extends CongressBaseActivity {
                 searchCriteria.length() < 2 ||
                 searchCriteria.length() > 30)
             return;
+
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
 
         DataEntries.SCC_Search_Result =
                 realm.where(Speaker.class)

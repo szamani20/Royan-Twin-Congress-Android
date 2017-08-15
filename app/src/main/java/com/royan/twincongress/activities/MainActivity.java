@@ -182,8 +182,10 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        drawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            drawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+        }
     }
 
     @Override

@@ -1,21 +1,17 @@
 package com.royan.twincongress.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.royan.twincongress.R;
-//import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.adapters.WinnerAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
@@ -27,14 +23,13 @@ import java.util.ArrayList;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 
+
 /**
  * Created by szamani on 7/26/2017.
  */
 
 public class AwardActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private WinnerAdapter adapter;
-    private BottomBar bottomBar;
     private Realm realm;
 
     @Override
@@ -45,11 +40,10 @@ public class AwardActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.awards);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         initDefaultTabModels();
         initRecyclerView();
@@ -58,7 +52,7 @@ public class AwardActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.winnerRView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.winnerRView);
         adapter = new WinnerAdapter(this, DataEntries.AKP_International_Winner,
                 DataType.NationalWinner);
         recyclerView.setAdapter(adapter);
@@ -71,7 +65,7 @@ public class AwardActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -130,6 +124,9 @@ public class AwardActivity extends AppCompatActivity {
     }
 
     private void fetchData(int type) {
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
+
         // cause we have few winners, no need to specify range in query
         OrderedRealmCollection<Winner> winners =
                 realm.where(Winner.class)

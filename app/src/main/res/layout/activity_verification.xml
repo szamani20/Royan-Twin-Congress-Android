@@ -6,5 +6,4 @@
 
     <include layout="@layout/content_verification" />
 
-
 </android.support.constraint.ConstraintLayout>

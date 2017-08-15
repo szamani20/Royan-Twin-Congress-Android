@@ -2,7 +2,6 @@ package com.royan.twincongress.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,11 +36,10 @@ public class SponsorActivity extends CompanyBaseActivity {
         toolbar.setTitle(R.string.sponsors);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         initModel();
         initRecyclerView();
@@ -71,6 +69,9 @@ public class SponsorActivity extends CompanyBaseActivity {
 
     @Override
     protected void fetchData() {  // could be abstract
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
+
         OrderedRealmCollection<Company> companies =
                 realm.where(Company.class)
                         .equalTo("type", COMPANY_SPONSOR)

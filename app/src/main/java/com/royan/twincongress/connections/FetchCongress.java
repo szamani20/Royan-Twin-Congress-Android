@@ -15,12 +15,7 @@ import java.util.List;
 
 import static com.royan.twincongress.connections.FetchHelper.getUrlString;
 import static com.royan.twincongress.connections.FetchHelper.postUrlString;
-import static com.royan.twincongress.helpers.Constants.IS_SPEAKER;
-import static com.royan.twincongress.helpers.Constants.NURSE_CONGRESS;
-import static com.royan.twincongress.helpers.Constants.OP_SPEAKER;
-import static com.royan.twincongress.helpers.Constants.POSTER_SPEAKER;
-import static com.royan.twincongress.helpers.Constants.RBC_CONGRESS;
-import static com.royan.twincongress.helpers.Constants.SCC_CONGRESS;
+import static com.royan.twincongress.helpers.Constants.*;
 
 /**
  * Created by szamani on 8/4/2017.

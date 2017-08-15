@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
-import com.royan.twincongress.activities.SpeakerDetailActivity;
 import com.royan.twincongress.activities.WinnerDetailActivity;
 import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.helpers.RandomHelper;
@@ -109,7 +107,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
         @BindView(R.id.winnerCardView) CardView winnerCardView;
         @BindView(R.id.topBorder) LinearLayout topBorder;
 
-        public WinnerViewHolder(View itemView) {
+        WinnerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 

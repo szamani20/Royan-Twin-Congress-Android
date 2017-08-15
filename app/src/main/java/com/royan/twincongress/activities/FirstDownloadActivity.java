@@ -53,7 +53,7 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_download);
-        realm = Realm.getDefaultInstance();
+
         ButterKnife.bind(this);
     }
 
@@ -150,6 +150,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                                             final List<Event> eventList) {
         System.out.println("Finished");
 
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

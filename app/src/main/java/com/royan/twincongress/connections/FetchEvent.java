@@ -20,6 +20,26 @@ import static com.royan.twincongress.connections.FetchHelper.postUrlString;
  */
 
 public class FetchEvent {
+    public List<Event> getEventRange(int start_id, int end_id) {
+        try {
+            Gson gson = new GsonBuilder().serializeNulls().create();
+            Type collectionType = new TypeToken<Collection<Event>>() {
+            }.getType();
+            String base_url = "https://royan.szamani.ir/agenda/fetch/";
+
+            FetchBodyRequest bodyRequest = new FetchBodyRequest(
+                    null, start_id, end_id);
+            System.out.println(base_url);
+            System.out.println(gson.toJson(bodyRequest));
+            String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
+            System.out.println(result_string);
+            return gson.fromJson(result_string, collectionType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 
     public List<Event> getEventsAll() {
         try {

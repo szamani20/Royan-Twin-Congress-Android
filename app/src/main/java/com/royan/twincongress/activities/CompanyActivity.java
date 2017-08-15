@@ -2,7 +2,6 @@ package com.royan.twincongress.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,6 @@ import com.royan.twincongress.models.Company;
 import com.royan.twincongress.models.DataType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -42,9 +40,6 @@ public class CompanyActivity extends CompanyBaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
 
         initModel();
         initRecyclerView();
@@ -74,6 +69,9 @@ public class CompanyActivity extends CompanyBaseActivity {
 
     @Override
     protected void fetchData() {
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
+
         OrderedRealmCollection<Company> companies =
                 realm.where(Company.class)
                 .equalTo("type", COMPANY_ORDINARY)

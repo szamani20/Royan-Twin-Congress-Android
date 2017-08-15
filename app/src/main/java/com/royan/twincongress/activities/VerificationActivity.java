@@ -12,8 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.royan.twincongress.R;
-import com.royan.twincongress.connections.FetchCongress;
-import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 
 import butterknife.BindView;
@@ -26,7 +24,6 @@ import butterknife.OnClick;
  */
 
 public class VerificationActivity extends AppCompatActivity {
-    private static final String PREFS_NAME = "VERIFICATION_ACTIVITY_PREFS";
     @BindView(R.id.verificationEditText)
     BootstrapEditText verificationEditText;
     @BindView(R.id.verifyButton)
@@ -48,12 +45,5 @@ public class VerificationActivity extends AppCompatActivity {
             startActivity(new Intent(VerificationActivity.this, MainActivity.class));
         else
             startActivity(new Intent(VerificationActivity.this, FirstDownloadActivity.class));
-    }
-
-    public void showSnackbar(View view, String message, int duration) {
-        InputMethodManager imm = (InputMethodManager) this
-                .getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        Snackbar.make(view, message, duration).show();
     }
 }

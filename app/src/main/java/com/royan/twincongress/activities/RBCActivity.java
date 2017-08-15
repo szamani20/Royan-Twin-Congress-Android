@@ -2,20 +2,14 @@ package com.royan.twincongress.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.royan.twincongress.R;
-//import com.royan.twincongress.adapters.SpeakerAdapter;
 import com.royan.twincongress.adapters.SpeakerAdapter;
-//import com.royan.twincongress.adapters.SpeakerRealmAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
-import com.royan.twincongress.helpers.SnackBarHelper;
-import com.royan.twincongress.models.ActivityType;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -27,6 +21,7 @@ import io.realm.Realm;
 
 import static com.royan.twincongress.helpers.Constants.SPEAKER_FETCH_OFFSET;
 import static com.royan.twincongress.helpers.Constants.SPEAKER_FETCH_SIZE;
+
 
 /**
  * Created by szamani on 7/26/2017.
@@ -43,13 +38,10 @@ public class RBCActivity extends CongressBaseActivity {
         toolbar.setTitle(R.string.stem_cell_congress);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        System.out.println("GOOD ON_CREATE 1");
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
-        System.out.println("GOOD ON_CREATE 2");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         congressType = 1;
         initDefaultTabModels();
@@ -147,6 +139,8 @@ public class RBCActivity extends CongressBaseActivity {
 
     @Override
     protected void fetchData(int congress, int type) {
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
         OrderedRealmCollection<Speaker> speakers =
                 realm.where(Speaker.class)
                         .equalTo("congress", congress)
@@ -231,6 +225,9 @@ public class RBCActivity extends CongressBaseActivity {
                 searchCriteria.length() > 30)
             return;
 
+        if (realm == null)
+            realm = Realm.getDefaultInstance();
+
         DataEntries.RBC_Search_Result =
                 realm.where(Speaker.class)
                         .equalTo("congress", 0)
@@ -256,7 +253,6 @@ public class RBCActivity extends CongressBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        realm.close();
-        System.out.println("Good ON_DESTROY");
     }
 
 }

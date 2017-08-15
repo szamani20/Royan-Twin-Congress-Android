@@ -28,7 +28,6 @@
         app:roundedCorners="true"
         app:showOutline="false" />
 
-
     <com.beardedhen.androidbootstrap.BootstrapProgressBar
         android:id="@+id/downloadProgressBar"
         style="@style/progress_example"
