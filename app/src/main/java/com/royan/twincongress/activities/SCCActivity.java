@@ -10,6 +10,7 @@ import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -50,6 +51,7 @@ public class SCCActivity extends CongressBaseActivity {
 
         toolbar.inflateMenu(R.menu.menu_search);
         setupTapTarget();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_scc));
     }
 
     @Override
@@ -238,18 +240,22 @@ public class SCCActivity extends CongressBaseActivity {
         if (realm == null)
             realm = Realm.getDefaultInstance();
 
+        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHH" + searchCriteria);
+
         DataEntries.SCC_Search_Result =
                 realm.where(Speaker.class)
                         .equalTo("congress", 0)
-                        .like("name", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("country", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("topic", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
+                        .like("name", "sadas", Case.INSENSITIVE)
+//                        .or()
+//                        .like("name", "*"+searchCriteria+"?", Case.INSENSITIVE)
+//                        .or()
+//                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("country", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("topic", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
         System.out.println("SEARCH: " + DataEntries.SCC_Search_Result.size());

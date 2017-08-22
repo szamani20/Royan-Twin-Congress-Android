@@ -3,6 +3,7 @@ package com.royan.twincongress.activities;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -22,6 +23,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.royan.twincongress.R;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 
 import butterknife.BindView;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     CardView AKPCardView;
     @BindView(R.id.AKPCardView)
     CardView nurseCardView;
+    @BindView(R.id.toolbar_layout)
+    CollapsingToolbarLayout toolbar_layout;
     private Drawer drawer;
 
     @Override
@@ -52,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setupDrawer(toolbar);
         setupTapTarget();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_main));
+        toolbar_layout.setCollapsedTitleTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/AvenirLTStd-Black.otf"
+        ));
+        toolbar_layout.setExpandedTitleTypeface(Typeface.createFromAsset(
+                getAssets(), "fonts/AvenirLTStd-Black.otf"
+        ));
     }
 
     private void setupTapTarget() {
@@ -111,29 +122,32 @@ public class MainActivity extends AppCompatActivity {
     private void setupDrawer(Toolbar toolbar) {
         AccountHeader header = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.drawable.header)
+                .withHeaderBackground(R.drawable.targaryen)
                 .build();
 
         PrimaryDrawerItem item = new PrimaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIdentifier(Constants.ITEM_BANNER).withName(R.string.app_name);
         SecondaryDrawerItem bookmarks = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_bookmark_black_24dp)
                 .withIdentifier(Constants.ITEM_BOOKMARKS).withName(R.string.bookmarks);
         SecondaryDrawerItem agenda = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_view_agenda_black_24dp)
                 .withIdentifier(Constants.ITEM_AGENDA).withName(R.string.agenda);
         SecondaryDrawerItem companies = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_format_list_bulleted_black_24dp)
                 .withIdentifier(Constants.ITEM_COMPANIES).withName(R.string.companies);
         SecondaryDrawerItem sponsors = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_format_list_numbered_black_24dp)
                 .withIdentifier(Constants.ITEM_SPONSORS).withName(R.string.sponsors);
         SecondaryDrawerItem map = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_map_black_24dp)
                 .withIdentifier(Constants.ITEM_MAP).withName(R.string.map);
-        SecondaryDrawerItem update = new SecondaryDrawerItem()
-                .withIcon(R.drawable.ic_update_black_24dp)
-                .withIdentifier(Constants.ITEM_UPDATE).withName(R.string.update);
 
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -147,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         agenda,
                         companies,
                         sponsors,
-                        map,
-                        update
+                        map
                 )
                 .withSelectedItem(-1)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -172,9 +185,6 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case Constants.ITEM_MAP:
                                 startActivity(new Intent(MainActivity.this, MapActivity.class));
-                                break;
-                            case Constants.ITEM_UPDATE:
-                                showSnackbar(MainActivity.this, view, "Update", Snackbar.LENGTH_SHORT);
                                 break;
                         }
                         return true;

@@ -20,7 +20,7 @@
         <LinearLayout
             android:id="@+id/topBorder"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:background="@color/colorPrimary"
             android:orientation="vertical" />
 
@@ -34,49 +34,133 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="start"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/speakerNameLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/person_icon" />
+
+                        <TextView
+                            android:id="@+id/speakerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:maxWidth="200dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/speakerEmailLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/email_icon" />
+
+                        <TextView
+                            android:id="@+id/speakerEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:maxWidth="200dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/speakerCountryLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/country_icon" />
+
+                        <TextView
+                            android:id="@+id/speakerCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:maxWidth="200dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/speakerTimeLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/time_icon" />
+
+                        <TextView
+                            android:id="@+id/speechTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:maxWidth="200dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/speakerVenueLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/place_icon" />
+
+                        <TextView
+                            android:id="@+id/speechVenue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:maxWidth="200dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <com.dmallcott.dismissibleimageview.DismissibleImageView
                     android:id="@+id/speakerAvatar"
                     android:layout_width="120dp"
-                    android:layout_height="120dp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/speakerName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp" />
-
-                    <TextView
-                        android:id="@+id/speakerEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp" />
-
-                    <TextView
-                        android:id="@+id/speakerCountry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp" />
-
-                    <TextView
-                        android:id="@+id/speechTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp" />
-
-                    <TextView
-                        android:id="@+id/speechVenue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp" />
-
-                </LinearLayout>
+                    android:layout_height="120dp"
+                    android:cropToPadding="true"
+                    android:scaleType="centerCrop" />
 
             </LinearLayout>
 
@@ -84,13 +168,15 @@
                 android:id="@+id/speechAffiliation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:lineSpacingExtra="2dp" />
 
             <TextView
                 android:id="@+id/speechTopic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:lineSpacingExtra="2dp" />
 
         </LinearLayout>
 

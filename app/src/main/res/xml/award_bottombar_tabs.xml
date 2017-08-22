@@ -2,12 +2,12 @@
 <tabs>
 
     <tab
-        icon="@drawable/ic_trending_down_black_24dp"
+        icon="@drawable/winner_icon"
         id="@+id/tab_in"
         title="International Winners" />
 
     <tab
-        icon="@drawable/ic_trending_up_black_24dp"
+        icon="@drawable/winner_icon"
         id="@+id/tab_n"
         title="National Winners" />
 

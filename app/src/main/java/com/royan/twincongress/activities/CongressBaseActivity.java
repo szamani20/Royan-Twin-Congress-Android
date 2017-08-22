@@ -219,7 +219,7 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
                 .title(R.string.search)
                 .icon(ContextCompat.getDrawable(this, R.drawable.ic_search_black_24dp))
                 .positiveText(R.string.search)
-                .negativeText(R.string.cancel)
+                .negativeText(R.string.cancel_search)
                 .cancelable(false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override

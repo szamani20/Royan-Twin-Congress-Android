@@ -3,6 +3,7 @@ package com.royan.twincongress.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 
 /**
@@ -14,9 +15,17 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (SharedPreferencesHelper.getVerified(getApplicationContext()))
+        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
+                SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified and already downloaded
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        else startActivity(new Intent(SplashActivity.this, VerificationActivity.class));
+
+        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
+                !SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified but not yet downloaded
+            startActivity(new Intent(SplashActivity.this, FirstDownloadActivity.class));
+
+        if (!SharedPreferencesHelper.getVerified(getApplicationContext()))  // not yet verified
+            startActivity(new Intent(SplashActivity.this, VerificationActivity.class));
+
         finish();
     }
 }

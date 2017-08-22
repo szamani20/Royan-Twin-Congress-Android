@@ -29,10 +29,10 @@ public class FetchEvent {
 
             FetchBodyRequest bodyRequest = new FetchBodyRequest(
                     null, start_id, end_id);
-            System.out.println(base_url);
-            System.out.println(gson.toJson(bodyRequest));
+//            System.out.println(base_url);
+//            System.out.println(gson.toJson(bodyRequest));
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-            System.out.println(result_string);
+//            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,8 +52,8 @@ public class FetchEvent {
             System.out.println(result_string);
 
             List<Event> res = gson.fromJson(result_string, collectionType);
-            for (Event e : res)
-                System.out.println(e.name + " " + e.topic);
+//            for (Event e : res)
+//                System.out.println(e.name + " " + e.topic);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

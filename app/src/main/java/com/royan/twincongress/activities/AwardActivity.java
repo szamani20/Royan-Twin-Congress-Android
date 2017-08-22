@@ -15,6 +15,7 @@ import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.WinnerAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Winner;
 
@@ -49,6 +50,8 @@ public class AwardActivity extends AppCompatActivity {
         initRecyclerView();
         initModels();
         initViews();
+
+        FontHelper.applyDefaultFont(findViewById(R.id.akp_activity));
     }
 
     private void initRecyclerView() {

@@ -71,7 +71,7 @@ public class FetchCongress {
                     speaker_type, start_id, end_id);
 
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-            System.out.println(result_string);
+//            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,7 +99,7 @@ public class FetchCongress {
             }.getType();
             String base_url = setBaseUrl("https://royan.szamani.ir/", congress, type);
             String result_string = getUrlString(base_url);
-            System.out.println(result_string);
+//            System.out.println(result_string);
 
             List<Speaker> res = gson.fromJson(result_string, collectionType);
             return res;

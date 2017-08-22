@@ -16,6 +16,7 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.activities.WinnerDetailActivity;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.RandomHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Winner;
@@ -47,6 +48,8 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
     @Override
     public WinnerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.winner_card, parent, false);
+        WinnerViewHolder holder = new WinnerViewHolder(itemView);
+        FontHelper.applyDefaultFont(holder.winnerCardView);
         return new WinnerAdapter.WinnerViewHolder(itemView);
     }
 
@@ -60,6 +63,23 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
         holder.awardVenue.setText(winner.award_venue);
         holder.winnerAffiliation.setText(winner.affiliation);
         holder.winnerShortCV.setText(winner.short_cv);
+
+        if (winner.name == null || winner.name.length() == 0)
+            holder.winnerNameLayout.setVisibility(View.GONE);
+        if (winner.email == null || winner.email.length() == 0)
+            holder.winnerEmailLayout.setVisibility(View.GONE);
+        if (winner.country == null || winner.country.length() == 0)
+            holder.winnerEmailLayout.setVisibility(View.GONE);
+        if (winner.country == null || winner.country.length() == 0)
+            holder.winnerCountryLayout.setVisibility(View.GONE);
+        if (winner.award_time == null || winner.award_time.length() == 0)
+            holder.winnerTimeLayout.setVisibility(View.GONE);
+        if (winner.award_venue == null || winner.award_venue.length() == 0)
+            holder.winnerVenueLayout.setVisibility(View.GONE);
+
+        int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
+                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
+        holder.topBorder.setBackgroundColor(randomColor);
 
         if (winner.avatar != null &&
                 winner.avatar.length() != 0)
@@ -75,7 +95,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
                     winner.name.startsWith("prof") && winner.name.length() > 6)
                 letter = winner.name.substring(6, 7);
             TextDrawable drawable = TextDrawable.builder()
-                    .buildRound(letter, Color.RED);
+                    .buildRound(letter, randomColor);
             holder.winnerAvatar.setImageDrawable(drawable);
         }
 
@@ -106,13 +126,20 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
         @BindView(R.id.winnerShortCV) TextView winnerShortCV;
         @BindView(R.id.winnerCardView) CardView winnerCardView;
         @BindView(R.id.topBorder) LinearLayout topBorder;
+        @BindView(R.id.winnerNameLayout)
+        LinearLayout winnerNameLayout;
+        @BindView(R.id.winnerEmailLayout)
+        LinearLayout winnerEmailLayout;
+        @BindView(R.id.winnerCountryLayout)
+        LinearLayout winnerCountryLayout;
+        @BindView(R.id.winnerTimeLayout)
+        LinearLayout winnerTimeLayout;
+        @BindView(R.id.winnerVenueLayout)
+        LinearLayout winnerVenueLayout;
 
         WinnerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            topBorder.setBackgroundColor(context.getResources().getIntArray(R.array.top_bar_colors)[
-                    RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)]);
         }
     }
 }

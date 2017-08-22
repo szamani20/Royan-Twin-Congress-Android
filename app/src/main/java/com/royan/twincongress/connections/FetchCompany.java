@@ -85,7 +85,7 @@ public class FetchCompany {
                     companyType, start_id, end_id);
 
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-            System.out.println(result_string);
+//            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,8 +138,8 @@ public class FetchCompany {
             System.out.println(result_string);
 
             List<Company> res = gson.fromJson(result_string, collectionType);
-            for (Company c : res)
-                System.out.println(c.type + " " + c.name);
+//            for (Company c : res)
+//                System.out.println(c.type + " " + c.name);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

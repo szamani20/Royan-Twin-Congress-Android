@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activitySearchResultLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="@dimen/materialize_toolbar"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/noResultText"
-            style="@style/wrapping_fa_text"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:textSize="25sp"
-            android:visibility="gone"
-            app:bootstrapBrand="danger"
-            app:bootstrapText="Your search has no results" />
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/noResultText"
+        style="@style/wrapping_fa_text"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:bootstrapBrand="danger"
+        app:bootstrapText="Your search has no results" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/speakerResultRView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:clipToPadding="false"
+        android:paddingBottom="75dp" />
+
+</RelativeLayout>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/speakerResultRView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="75dp" />
 
-    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/activitySearchResultLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<com.beardedhen.androidbootstrap.AwesomeTextView-->
+            <!--android:id="@+id/noResultText"-->
+            <!--style="@style/wrapping_fa_text"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:textSize="25sp"-->
+            <!--android:visibility="gone"-->
+            <!--app:bootstrapBrand="danger"-->
+            <!--app:bootstrapText="Your search has no results" />-->
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/speakerResultRView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:clipToPadding="false"-->
+            <!--android:paddingBottom="75dp" />-->
+
+    <!--</LinearLayout>-->
+
+<!--</android.support.constraint.ConstraintLayout>-->

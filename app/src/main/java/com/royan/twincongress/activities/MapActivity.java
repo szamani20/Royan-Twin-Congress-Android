@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.royan.twincongress.R;
+import com.royan.twincongress.helpers.FontHelper;
 
 /**
  * Created by szamani on 7/30/2017.
@@ -21,5 +22,6 @@ public class MapActivity extends AppCompatActivity {
 
         SubsamplingScaleImageView mapImage = (SubsamplingScaleImageView) findViewById(R.id.mapImage);
         mapImage.setImage(ImageSource.resource(R.drawable.westeros));
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_map));
     }
 }

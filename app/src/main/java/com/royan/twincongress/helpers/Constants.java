@@ -71,6 +71,7 @@ public class Constants {
     };
 
     public static final int EVENT_FETCH_SIZE = 20;
+    public static final String RANDOM_COLOR = "RANDOM_COLOR";
     public static int EVENT_FETCH_OFFSET = 0;
 
     public static final String CONGRESS_TYPE = "CONGRESS_TYPE";
@@ -79,4 +80,27 @@ public class Constants {
     public static final String MAIN_ACTIVITY = "MAIN_ACTIVITY";
     public static final String CONGRESS_ACTIVITY = "CONGRESS_ACTIVITY";
     public static final String SPEAKER_DETAIL_ACTIVITY = "SPEAKER_DETAIL_ACTIVITY";
+
+    public static final String[] VERIFICATION_CODES = {
+            "54blf5",
+            "0aq44f",
+            "8gsiiv",
+            "uqzint",
+            "qp45zi",
+            "3ih1z0",
+            "6ezayv",
+            "jrrnkm",
+            "pkglbi",
+            "rw3cvg",
+            "7tnbzr",
+            "aed6ef",
+            "kxm85i",
+            "gz2omw",
+            "wlfft8",
+            "hf6dl1",
+            "rifetd",
+            "foqhli",
+            "8etegb",
+            "opz5pm"
+    };
 }

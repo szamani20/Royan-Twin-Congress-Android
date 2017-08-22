@@ -1,6 +1,7 @@
 package com.royan.twincongress.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.github.vipulasri.timelineview.TimelineView;
 import com.royan.twincongress.R;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Event;
 
 import java.util.List;
@@ -34,6 +36,8 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
     @Override
     public AgendaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.agenda_card, parent, false);
+        AgendaViewHolder holder = new AgendaViewHolder(itemView, viewType);
+        FontHelper.applyDefaultFont(holder.agendaCardView);
         return new AgendaViewHolder(itemView, viewType);
     }
 
@@ -62,6 +66,8 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         @BindView(R.id.eventName) TextView eventName;
         @BindView(R.id.eventTopic) TextView eventTopic;
         @BindView(R.id.eventVenue) TextView eventVenue;
+        @BindView(R.id.agendaCardView)
+        CardView agendaCardView;
 
         public AgendaViewHolder(View itemView, int viewType) {
             super(itemView);

@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.AgendaAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Event;
 
 import java.util.ArrayList;
@@ -31,11 +33,18 @@ public class AgendaActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(R.string.agenda);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.agenda);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         initModel();
         initRecyclerView();
+        FontHelper.applyDefaultFont(findViewById(R.id.activityAgendaLayout));
     }
 
     private void initRecyclerView() {

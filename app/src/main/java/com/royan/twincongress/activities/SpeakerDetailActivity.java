@@ -14,6 +14,7 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.picassoHelper.CircleTransform;
@@ -47,6 +48,7 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
 
         mToolbar.inflateMenu(R.menu.menu_speaker_detail);
         setupTapTarget();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_speaker_detail));
     }
 
     private void setupTapTarget() {
@@ -150,7 +152,6 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
     }
 
     protected void bindViewData() {
-//        nameText.setText(speaker.name);
         mTitle.setText(speaker.name);
         if (speaker.avatar != null &&
                 speaker.avatar.length() != 0)
@@ -171,7 +172,7 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
                     .width(110)
                     .height(110)
                     .endConfig()
-                    .buildRound(letter, Color.RED);
+                    .buildRound(letter, getIntent().getIntExtra(Constants.RANDOM_COLOR, R.color.material_amber_500));
             avatar.setImageDrawable(drawable);
         }
     }

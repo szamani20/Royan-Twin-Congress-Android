@@ -3,6 +3,7 @@ package com.royan.twincongress;
 import android.app.Application;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.RandomHelper;
 
 import co.ronash.pushe.Pushe;
@@ -26,5 +27,7 @@ public class RoyanApplication extends Application {
 
         TypefaceProvider.registerDefaultIconSets();
         RandomHelper.initRandom();
+
+        FontHelper.getFont(this);
     }
 }

@@ -115,7 +115,7 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
             congressData = new ArrayList<>();
             winnersData = new ArrayList<>();
             companiesData = new ArrayList<>();
-//            eventsData = new ArrayList<>(); // not necessary
+            eventsData = new ArrayList<>(); // not necessary
             downloadProgressBar.setVisibility(View.VISIBLE);
         }
 
@@ -211,8 +211,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
 
                         winner.aabstract = aabstract;
 
-                        System.out.println(winner.type + " " +
-                                winner.id + " " + winner.name);
+//                        System.out.println(winner.type + " " +
+//                                winner.id + " " + winner.name);
                     }
                 }
 
@@ -233,8 +233,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                         for (RealmString r : companiesList.get(i).get(j).pics)
                             company.pics.add(r);
 
-                        System.out.println(company.type + " " +
-                                company.id + " " + company.name);
+//                        System.out.println(company.type + " " +
+//                                company.id + " " + company.name);
                     }
                 }
 
@@ -247,8 +247,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                     event.time = eventList.get(i).time;
                     event.venue = eventList.get(i).venue;
 
-                    System.out.println(event.id + " " +
-                            event.name + " " + event.topic);
+//                    System.out.println(event.id + " " +
+//                            event.name + " " + event.topic);
                 }
 
             }

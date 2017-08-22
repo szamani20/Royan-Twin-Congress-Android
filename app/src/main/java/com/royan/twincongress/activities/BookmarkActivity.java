@@ -5,11 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Speaker;
 
 import java.util.ArrayList;
@@ -35,12 +37,19 @@ public class BookmarkActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(R.string.bookmarks);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.bookmarks);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         initBookmarks();
         ButterKnife.bind(this);
         initRecyclerView();
+        FontHelper.applyDefaultFont(findViewById(R.id.activityBookmarkLayout));
     }
 
     private void initBookmarks() {

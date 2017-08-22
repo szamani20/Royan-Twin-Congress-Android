@@ -9,6 +9,7 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Winner;
 import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.Picasso;
@@ -38,6 +39,7 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
         initCardViews(winner.aabstract);
 
         mToolbar.inflateMenu(R.menu.menu_speaker_detail);
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_winner_detail));
     }
 
     @Override

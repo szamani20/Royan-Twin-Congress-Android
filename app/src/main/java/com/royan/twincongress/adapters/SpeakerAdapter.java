@@ -3,6 +3,7 @@ package com.royan.twincongress.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.activities.SpeakerDetailActivity;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.RandomHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
@@ -50,7 +52,9 @@ public class SpeakerAdapter extends
     @Override
     public SpeakerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.speaker_card, parent, false);
-        return new SpeakerViewHolder(itemView);
+        SpeakerViewHolder holder = new SpeakerViewHolder(itemView);
+        FontHelper.applyDefaultFont(holder.speakerCardView);
+        return holder;
     }
 
     @Override
@@ -63,6 +67,26 @@ public class SpeakerAdapter extends
         holder.speechVenue.setText(speaker.venue);
         holder.speechAffiliation.setText(speaker.affiliation);
         holder.speechTopic.setText(speaker.topic);
+
+        if (speaker.name == null || speaker.name.length() == 0)
+            holder.speakerNameLayout.setVisibility(View.GONE);
+        if (speaker.email == null || speaker.email.length() == 0)
+            holder.speakerEmailLayout.setVisibility(View.GONE);
+        if (speaker.country == null || speaker.country.length() == 0)
+            holder.speakerEmailLayout.setVisibility(View.GONE);
+        if (speaker.country == null || speaker.country.length() == 0)
+            holder.speakerCountryLayout.setVisibility(View.GONE);
+        if (speaker.time == null || speaker.time.length() == 0)
+            holder.speakerTimeLayout.setVisibility(View.GONE);
+        if (speaker.venue == null || speaker.venue.length() == 0)
+            holder.speakerVenueLayout.setVisibility(View.GONE);
+
+        holder.speakerName.setTypeface(Typeface.createFromAsset(context.getAssets(),
+                "fonts/AvenirLTStd-Heavy.otf"));
+
+        final int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
+                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
+        holder.topBorder.setBackgroundColor(randomColor);
 
         if (speaker.avatar != null &&
                 speaker.avatar.length() != 0)
@@ -78,7 +102,7 @@ public class SpeakerAdapter extends
                     speaker.name.startsWith("prof") && speaker.name.length() > 6)
                 letter = speaker.name.substring(6, 7);
             TextDrawable drawable = TextDrawable.builder()
-                    .buildRound(letter, Color.RED);
+                    .buildRound(letter, randomColor);
             System.out.println(letter + "  " + drawable.getIntrinsicHeight() + "  " + drawable.getIntrinsicWidth());
             holder.speakerAvatar.setImageDrawable(drawable);
         }
@@ -90,6 +114,7 @@ public class SpeakerAdapter extends
                 intent.putExtra(Constants.SPEAKER_ID, speaker.id - 1);
                 intent.putExtra(Constants.SPEAKER_TYPE, speaker.type);
                 intent.putExtra(Constants.CONGRESS_TYPE, speaker.congress);
+                intent.putExtra(Constants.RANDOM_COLOR, randomColor);
                 context.startActivity(intent);
             }
         });
@@ -122,12 +147,20 @@ public class SpeakerAdapter extends
         CardView speakerCardView;
         @BindView(R.id.topBorder)
         LinearLayout topBorder;
+        @BindView(R.id.speakerNameLayout)
+        LinearLayout speakerNameLayout;
+        @BindView(R.id.speakerEmailLayout)
+        LinearLayout speakerEmailLayout;
+        @BindView(R.id.speakerCountryLayout)
+        LinearLayout speakerCountryLayout;
+        @BindView(R.id.speakerTimeLayout)
+        LinearLayout speakerTimeLayout;
+        @BindView(R.id.speakerVenueLayout)
+        LinearLayout speakerVenueLayout;
 
         SpeakerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            topBorder.setBackgroundColor(context.getResources().getIntArray(R.array.top_bar_colors)[
-                    RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)]);
         }
 
     }

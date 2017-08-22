@@ -2,18 +2,16 @@
 <tabs>
 
     <tab
+
         icon="@drawable/invited_icon"
-        id="@+id/tab_is"
-        title="Invited Speakers" />
+        id="@+id/tab_is" />
 
     <tab
         icon="@drawable/oral_icon"
-        id="@+id/tab_os"
-        title="Oral Speakers" />
+        id="@+id/tab_os" />
 
     <tab
         icon="@drawable/poster_icon"
-        id="@+id/tab_p"
-        title="Posters" />
+        id="@+id/tab_p" />
 
 </tabs>

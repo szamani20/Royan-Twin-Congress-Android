@@ -21,8 +21,7 @@
         <LinearLayout
             android:id="@+id/sectionTopBorder"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/colorPrimary"
+            android:layout_height="2dp"
             android:orientation="vertical" />
 
         <LinearLayout
@@ -30,6 +29,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/sectionIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/sectionTitle"
@@ -41,35 +47,17 @@
                 android:text="@string/stem_cell_congress"
                 android:textSize="16sp" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/sectionIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center|top"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/stemcell_icon" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical" />
-
-        <TextView
+        <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sectionMainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="8dp"
-            android:padding="5dp"
-            android:text="@string/semi_large_text"
-            android:textSize="18sp" />
+            ext:documentView_insetPadding="10dp"
+            ext:documentView_lineHeightMultiplier="1.1"
+            ext:documentView_textAlignment="justified"
+            ext:documentView_textSize="18sp"
+            ext:documentView_textTypefacePath="fonts/AvenirLTStd-Light.otf" />
 
     </LinearLayout>
 

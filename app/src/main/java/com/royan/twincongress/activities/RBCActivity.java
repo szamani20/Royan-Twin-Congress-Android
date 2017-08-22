@@ -10,6 +10,7 @@ import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -35,7 +36,7 @@ public class RBCActivity extends CongressBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rbc);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.stem_cell_congress);
+        toolbar.setTitle(R.string.reproductive_biomedicine_congress);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -50,6 +51,8 @@ public class RBCActivity extends CongressBaseActivity {
         initViews();
 
         toolbar.inflateMenu(R.menu.menu_search);
+        setupTapTarget();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_rbc));
     }
 
     @Override
@@ -231,15 +234,15 @@ public class RBCActivity extends CongressBaseActivity {
         DataEntries.RBC_Search_Result =
                 realm.where(Speaker.class)
                         .equalTo("congress", 0)
-                        .like("name", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("country", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("topic", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
+                        .like("name", "adsfasd", Case.INSENSITIVE)
+//                        .or()
+//                        .like("country", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("topic", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
         System.out.println("SEARCH: " + DataEntries.RBC_Search_Result.size());

@@ -102,6 +102,7 @@
     <string name="update">Update data</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel_search">Cancel</string>
     <string name="speaker_name">Speaker Name</string>
     <string name="empty" />
     <string name="speaker_affiliation">Speaker Affiliation</string>
@@ -124,6 +125,7 @@
     <string name="bookmark">Bookmark</string>
     <string name="navigation_drawer">Navigation Drawer</string>
     <string name="navigation_drawer_text">Access agenda, companies, sponsors etc. here</string>
+    <string name="verification_code_wrong">Wrong Code</string>
 
     <array name="congress_search_items">
         <item>Invited Speakers</item>

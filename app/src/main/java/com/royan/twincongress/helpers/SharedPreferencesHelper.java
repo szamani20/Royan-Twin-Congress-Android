@@ -27,6 +27,15 @@ public class SharedPreferencesHelper {
         return preferences.getBoolean(VERIFICATION_KEY, true);
     }
 
+    // only called once
+    public static void setVerified(Context context, boolean verified) {
+        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, 0);
+
+        Editor editor = preferences.edit();
+        editor.putBoolean(VERIFICATION_KEY, verified);
+        editor.apply();
+    }
+
     public static boolean getActivityTapTarget(Context context, final String activityName) {
         SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, 0);
 

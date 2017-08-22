@@ -64,8 +64,8 @@ public class FetchWinners {
             System.out.println(result_string);
 
             List<Winner> res = gson.fromJson(result_string, collectionType);
-//            for (Winner w : res)
-//                System.out.println(w.type + " " + w.name);
+            for (Winner w : res)
+                System.out.println(w.type + " " + w.name);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.SpeakerAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 
@@ -49,6 +50,8 @@ public class NurseActivity extends CongressBaseActivity {
         initViews();
 
         toolbar.inflateMenu(R.menu.menu_search);
+        setupTapTarget();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_nurse));
     }
 
     @Override
@@ -227,15 +230,15 @@ public class NurseActivity extends CongressBaseActivity {
         DataEntries.Nurse_Search_Result =
                 realm.where(Speaker.class)
                         .equalTo("congress", 0)
-                        .like("name", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("country", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("topic", searchCriteria, Case.INSENSITIVE)
-                        .or()
-                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
+                        .like("name", "adsfagsdhd", Case.INSENSITIVE)
+//                        .or()
+//                        .like("affiliation", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("country", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("topic", searchCriteria, Case.INSENSITIVE)
+//                        .or()
+//                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
         System.out.println("SEARCH: " + DataEntries.Nurse_Search_Result.size());

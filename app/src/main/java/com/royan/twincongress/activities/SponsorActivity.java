@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.royan.twincongress.R;
 import com.royan.twincongress.adapters.CompanyAdapter;
 import com.royan.twincongress.dataEntries.DataEntries;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Company;
 import com.royan.twincongress.models.DataType;
 
@@ -43,6 +44,7 @@ public class SponsorActivity extends CompanyBaseActivity {
 
         initModel();
         initRecyclerView();
+        FontHelper.applyDefaultFont(findViewById(R.id.activity_sponsor));
     }
 
     @Override

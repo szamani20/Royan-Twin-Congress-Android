@@ -2,6 +2,7 @@ package com.royan.twincongress.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
+import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Company;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.picassoHelper.CircleTransform;
@@ -42,6 +44,8 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     @Override
     public CompanyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.company_card, parent, false);
+        CompanyViewHolder holder = new CompanyViewHolder(itemView);
+        FontHelper.applyDefaultFont(holder.companyCardView);
         return new CompanyViewHolder(itemView);
     }
 
@@ -87,6 +91,8 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         TextView companyLocation;
         @BindView(R.id.companyAddress)
         TextView companyAddress;
+        @BindView(R.id.companyCardView)
+        CardView companyCardView;
 
         CompanyViewHolder(View itemView) {
             super(itemView);
