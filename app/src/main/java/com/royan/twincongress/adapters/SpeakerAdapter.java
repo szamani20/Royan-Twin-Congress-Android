@@ -1,9 +1,11 @@
 package com.royan.twincongress.adapters;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +19,9 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.activities.SpeakerDetailActivity;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FirstLetterDrawableHelper;
 import com.royan.twincongress.helpers.FontHelper;
-import com.royan.twincongress.helpers.RandomHelper;
+import com.royan.twincongress.helpers.SnackBarHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.picassoHelper.CircleTransform;
@@ -84,9 +87,9 @@ public class SpeakerAdapter extends
         holder.speakerName.setTypeface(Typeface.createFromAsset(context.getAssets(),
                 "fonts/AvenirLTStd-Heavy.otf"));
 
-        final int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
-                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
-        holder.topBorder.setBackgroundColor(randomColor);
+        TextDrawable drawable = FirstLetterDrawableHelper
+                .getBigDrawable(speaker.name.substring(0, 1),
+                        context, holder.topBorder);
 
         if (speaker.avatar != null &&
                 speaker.avatar.length() != 0)
@@ -94,16 +97,9 @@ public class SpeakerAdapter extends
                     .transform(new CircleTransform())
                     .resize(120, 120)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_landscape)
+                    .placeholder(drawable)
                     .into(holder.speakerAvatar);
         else {
-            String letter = speaker.name.substring(0, 1);
-            if (speaker.name.startsWith("Prof") ||
-                    speaker.name.startsWith("prof") && speaker.name.length() > 6)
-                letter = speaker.name.substring(6, 7);
-            TextDrawable drawable = TextDrawable.builder()
-                    .buildRound(letter, randomColor);
-            System.out.println(letter + "  " + drawable.getIntrinsicHeight() + "  " + drawable.getIntrinsicWidth());
             holder.speakerAvatar.setImageDrawable(drawable);
         }
 
@@ -114,8 +110,35 @@ public class SpeakerAdapter extends
                 intent.putExtra(Constants.SPEAKER_ID, speaker.id - 1);
                 intent.putExtra(Constants.SPEAKER_TYPE, speaker.type);
                 intent.putExtra(Constants.CONGRESS_TYPE, speaker.congress);
-                intent.putExtra(Constants.RANDOM_COLOR, randomColor);
                 context.startActivity(intent);
+            }
+        });
+
+        holder.speakerName.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Speaker Name", speaker.name);
+                clipboard.setPrimaryClip(clip);
+                SnackBarHelper.showSnackbar(context, v,
+                        context.getResources().getString(R.string.copied_to_clipboard),
+                        Snackbar.LENGTH_SHORT);
+
+                return true;
+            }
+        });
+
+        holder.speakerEmail.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Speaker Email", speaker.email);
+                clipboard.setPrimaryClip(clip);
+                SnackBarHelper.showSnackbar(context, v,
+                        context.getResources().getString(R.string.copied_to_clipboard),
+                        Snackbar.LENGTH_SHORT);
+
+                return true;
             }
         });
     }

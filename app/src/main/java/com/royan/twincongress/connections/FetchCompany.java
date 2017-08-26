@@ -135,7 +135,7 @@ public class FetchCompany {
 
             String base_url = setBaseUrl("https://royan.szamani.ir/", type);
             String result_string = getUrlString(base_url);
-            System.out.println(result_string);
+//            System.out.println(result_string);
 
             List<Company> res = gson.fromJson(result_string, collectionType);
 //            for (Company c : res)

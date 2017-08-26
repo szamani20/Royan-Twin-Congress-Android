@@ -44,7 +44,7 @@ public class GalleryHorizontalAdapter extends RecyclerView.Adapter<GalleryHorizo
                     .centerCrop()
                     .into(holder.pic);
         else
-            Picasso.with(context).load(R.drawable.ic_landscape)
+            Picasso.with(context).load(R.drawable.ic_person_outline_black_24dp)
                     .resize(200, 200)
                     .centerCrop()
                     .into(holder.pic);

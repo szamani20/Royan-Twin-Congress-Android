@@ -49,15 +49,24 @@
 
         </LinearLayout>
 
-        <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
+        <TextView
             android:id="@+id/sectionMainText"
+            android:longClickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ext:documentView_insetPadding="10dp"
-            ext:documentView_lineHeightMultiplier="1.1"
-            ext:documentView_textAlignment="justified"
-            ext:documentView_textSize="18sp"
-            ext:documentView_textTypefacePath="fonts/AvenirLTStd-Light.otf" />
+            android:lineSpacingExtra="3dp"
+            android:padding="10dp"
+            android:textSize="18sp" />
+
+        <!--<com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/sectionMainText"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--ext:documentView_insetPadding="10dp"-->
+        <!--ext:documentView_lineHeightMultiplier="1.1"-->
+        <!--ext:documentView_textAlignment="justified"-->
+        <!--ext:documentView_textSize="18sp"-->
+        <!--ext:documentView_textTypefacePath="fonts/AvenirLTStd-Light.otf" />-->
 
     </LinearLayout>
 

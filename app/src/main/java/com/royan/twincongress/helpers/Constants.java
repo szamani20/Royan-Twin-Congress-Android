@@ -24,8 +24,9 @@ public class Constants {
     public static final int ITEM_AGENDA = 4;
     public static final int ITEM_COMPANIES = 5;
     public static final int ITEM_SPONSORS = 6;
-    public static final int ITEM_MAP = 7;
-    public static final int ITEM_UPDATE = 8;
+    public static final int ITEM_MAP_GRAND = 7;
+    public static final int ITEM_MAP_SECOND = 8;
+    public static final int ITEM_MAP_FIRST = 9;
 
     public static final int BACKGROUND = 0;
     public static final int OBJECTIVE = 1;
@@ -55,7 +56,7 @@ public class Constants {
 
     public static final String SPEAKER_ID = "SPEAKER_ID";
 
-    public static final int SPEAKER_FETCH_SIZE = 20;
+    public static final int SPEAKER_FETCH_SIZE = 200;
     public static final String SEARCH_CRITERIA = "SEARCH_CRITERIA";
     public static final String WINNER_ID = "WINNER_ID";
     public static final String WINNER_TYPE = "WINNER_TYPE";
@@ -65,13 +66,14 @@ public class Constants {
             {0, 0, 0},
     };
 
-    public static final int COMPANY_FETCH_SIZE = 20;
+    public static final int COMPANY_FETCH_SIZE = 200;
     public static final int[] COMPANY_FETCH_OFFSET = {
             0, 0
     };
 
-    public static final int EVENT_FETCH_SIZE = 20;
+    public static final int EVENT_FETCH_SIZE = 200;
     public static final String RANDOM_COLOR = "RANDOM_COLOR";
+    public static final String MAP_TYPE = "MAP_TYPE";
     public static int EVENT_FETCH_OFFSET = 0;
 
     public static final String CONGRESS_TYPE = "CONGRESS_TYPE";

@@ -61,7 +61,7 @@ public class SCCActivity extends CongressBaseActivity {
                 DataType.InvitedSpeaker);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class SCCActivity extends CongressBaseActivity {
         switch (dataType) {
             case InvitedSpeaker:
                 if (DataEntries.SCC_IS_Speaker.size() >= Constants.SPEAKER_FETCH_SIZE) {
-                    System.out.println("General Content 3");
+//                    System.out.println("General Content 3");
                     DataEntries.SCC_IS_Speaker = DataEntries.SCC_IS_Speaker.subList(0, Constants.SPEAKER_FETCH_SIZE);
                     Constants.SPEAKER_FETCH_OFFSET[Constants.SCC_CONGRESS][Constants.IS_SPEAKER] = Constants.SPEAKER_FETCH_SIZE;
                 }
@@ -105,12 +105,8 @@ public class SCCActivity extends CongressBaseActivity {
 
     @Override
     protected void populateIS() {  // could be abstract
-        System.out.println(DataEntries.SCC_IS_Speaker == null);
-        if (DataEntries.SCC_IS_Speaker != null)
-            System.out.println(DataEntries.SCC_IS_Speaker.size());
         if (DataEntries.SCC_IS_Speaker == null ||
                 DataEntries.SCC_IS_Speaker.size() == 0) {
-            System.out.println("YOU ARE GODDAMN RIGHT");
             DataEntries.SCC_IS_Speaker = new ArrayList<>();
             fetchData(Constants.SCC_CONGRESS, Constants.IS_SPEAKER);
         }
@@ -154,17 +150,17 @@ public class SCCActivity extends CongressBaseActivity {
 
         SPEAKER_FETCH_OFFSET[congress][type] += speakers.size();
 
-        System.out.println("FETCH " + speakers.size());
+//        System.out.println("FETCH " + speakers.size());
 
         switch (type) {
             case Constants.IS_SPEAKER:
                 // Load more in this tab
                 if (adapter != null && adapter.dataType == DataType.InvitedSpeaker &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.SCC_IS_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -182,10 +178,10 @@ public class SCCActivity extends CongressBaseActivity {
             case Constants.OP_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.OralPresentation &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.SCC_OP_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -199,10 +195,10 @@ public class SCCActivity extends CongressBaseActivity {
             case Constants.POSTER_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.Poster &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.SCC_Poster_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -220,8 +216,8 @@ public class SCCActivity extends CongressBaseActivity {
     protected void setSearchContent() {
         if (DataEntries.SCC_Search_Result != null &&
                 DataEntries.SCC_Search_Result.size() != 0) {
-            for (Speaker s : DataEntries.SCC_Search_Result)
-                System.out.println(s.name);
+//            for (Speaker s : DataEntries.SCC_Search_Result)
+//                System.out.println(s.name);
             adapter.speakers = DataEntries.SCC_Search_Result;
             adapter.dataType = DataType.Search;
             adapter.notifyDataSetChanged();
@@ -240,7 +236,7 @@ public class SCCActivity extends CongressBaseActivity {
         if (realm == null)
             realm = Realm.getDefaultInstance();
 
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHH" + searchCriteria);
+//        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHH" + searchCriteria);
 
         DataEntries.SCC_Search_Result =
                 realm.where(Speaker.class)
@@ -258,7 +254,7 @@ public class SCCActivity extends CongressBaseActivity {
 //                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
-        System.out.println("SEARCH: " + DataEntries.SCC_Search_Result.size());
+//        System.out.println("SEARCH: " + DataEntries.SCC_Search_Result.size());
 
         adapter.speakers = DataEntries.SCC_Search_Result;
         adapter.dataType = DataType.Search;
@@ -269,7 +265,8 @@ public class SCCActivity extends CongressBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        realm.close();
+//        if (realm != null)
+//            realm.close();
     }
 
 }

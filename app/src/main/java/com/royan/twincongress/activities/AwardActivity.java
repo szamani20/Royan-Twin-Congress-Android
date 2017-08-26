@@ -60,7 +60,7 @@ public class AwardActivity extends AppCompatActivity {
                 DataType.NationalWinner);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     private void initDefaultTabModels() {
@@ -116,14 +116,18 @@ public class AwardActivity extends AppCompatActivity {
 
     private void populateInternational() {
         if (DataEntries.AKP_International_Winner == null ||
-                DataEntries.AKP_National_Winner.size() == 0)
+                DataEntries.AKP_International_Winner.size() == 0) {
+            DataEntries.AKP_International_Winner = new ArrayList<>();
             fetchData(Constants.WINNER_INTERNATIONAL);
+        }
     }
 
     private void populateNational() {
         if (DataEntries.AKP_National_Winner == null ||
-                DataEntries.AKP_National_Winner.size() == 0)
+                DataEntries.AKP_National_Winner.size() == 0) {
+            DataEntries.AKP_National_Winner = new ArrayList<>();
             fetchData(Constants.WINNER_NATIONAL);
+        }
     }
 
     private void fetchData(int type) {
@@ -159,6 +163,7 @@ public class AwardActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        realm.close();
+//        if (realm != null)
+//            realm.close();
     }
 }

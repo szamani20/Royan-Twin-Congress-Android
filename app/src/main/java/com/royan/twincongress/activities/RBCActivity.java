@@ -62,7 +62,7 @@ public class RBCActivity extends CongressBaseActivity {
                 DataType.InvitedSpeaker);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -101,10 +101,10 @@ public class RBCActivity extends CongressBaseActivity {
 
     @Override
     protected void populateIS() {
-        System.out.println("RBC Just before Populate IS");
+//        System.out.println("RBC Just before Populate IS");
         if (DataEntries.RBC_IS_Speaker == null ||
                 DataEntries.RBC_IS_Speaker.size() == 0) {
-            System.out.println("RBC Populate IS");
+//            System.out.println("RBC Populate IS");
             DataEntries.RBC_IS_Speaker = new ArrayList<>();
             fetchData(Constants.RBC_CONGRESS, Constants.IS_SPEAKER);
         }
@@ -158,17 +158,17 @@ public class RBCActivity extends CongressBaseActivity {
 
         SPEAKER_FETCH_OFFSET[congress][type] += speakers.size();
 
-        System.out.println("FETCH " + speakers.size());
+//        System.out.println("FETCH " + speakers.size());
 
         switch (type) {
             case Constants.IS_SPEAKER:
                 // Load more in this tab
                 if (adapter != null && adapter.dataType == DataType.InvitedSpeaker &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.RBC_IS_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -186,10 +186,10 @@ public class RBCActivity extends CongressBaseActivity {
             case Constants.OP_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.OralPresentation &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.RBC_OP_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -203,10 +203,10 @@ public class RBCActivity extends CongressBaseActivity {
             case Constants.POSTER_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.Poster &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.RBC_Poster_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -245,7 +245,7 @@ public class RBCActivity extends CongressBaseActivity {
 //                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
-        System.out.println("SEARCH: " + DataEntries.RBC_Search_Result.size());
+//        System.out.println("SEARCH: " + DataEntries.RBC_Search_Result.size());
 
         adapter.speakers = DataEntries.RBC_Search_Result;
         adapter.dataType = DataType.Search;
@@ -255,7 +255,8 @@ public class RBCActivity extends CongressBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        realm.close();
+//        if (realm != null)
+//            realm.close();
     }
 
 }

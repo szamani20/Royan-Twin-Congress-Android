@@ -61,5 +61,4 @@ dependencies {
     compile 'com.getkeepsafe.taptargetview:taptargetview:1.9.1'
     compile 'com.github.vipulasri:timelineview:1.0.5'
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
-    compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
 }

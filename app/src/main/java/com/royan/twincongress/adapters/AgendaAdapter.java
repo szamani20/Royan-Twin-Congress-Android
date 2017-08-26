@@ -1,16 +1,19 @@
 package com.royan.twincongress.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.vipulasri.timelineview.TimelineView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.helpers.FontHelper;
+import com.royan.twincongress.helpers.RandomHelper;
 import com.royan.twincongress.models.Event;
 
 import java.util.List;
@@ -37,7 +40,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
     public AgendaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.agenda_card, parent, false);
         AgendaViewHolder holder = new AgendaViewHolder(itemView, viewType);
-        FontHelper.applyDefaultFont(holder.agendaCardView);
+        FontHelper.applyDefaultFont(holder.agendaLLayout);
         return new AgendaViewHolder(itemView, viewType);
     }
 
@@ -48,6 +51,13 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.eventName.setText(event.name);
         holder.eventTopic.setText(event.topic);
         holder.eventVenue.setText(event.venue);
+
+        holder.eventName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/AvenirLTStd-Heavy.otf"));
+
+        int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
+                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
+
+        holder.topBorder.setBackgroundColor(randomColor);
     }
 
     @Override
@@ -61,13 +71,20 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
     }
 
     class AgendaViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.timeLine) TimelineView timelineView;
-        @BindView(R.id.eventTime) TextView eventTime;
-        @BindView(R.id.eventName) TextView eventName;
-        @BindView(R.id.eventTopic) TextView eventTopic;
-        @BindView(R.id.eventVenue) TextView eventVenue;
-        @BindView(R.id.agendaCardView)
-        CardView agendaCardView;
+        @BindView(R.id.timeLine)
+        TimelineView timelineView;
+        @BindView(R.id.eventTime)
+        TextView eventTime;
+        @BindView(R.id.eventName)
+        TextView eventName;
+        @BindView(R.id.eventTopic)
+        TextView eventTopic;
+        @BindView(R.id.eventVenue)
+        TextView eventVenue;
+        @BindView(R.id.agendaLLayout)
+        LinearLayout agendaLLayout;
+        @BindView(R.id.topBorder)
+        LinearLayout topBorder;
 
         public AgendaViewHolder(View itemView, int viewType) {
             super(itemView);

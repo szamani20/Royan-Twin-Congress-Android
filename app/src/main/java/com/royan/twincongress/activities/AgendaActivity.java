@@ -78,7 +78,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         EVENT_FETCH_OFFSET += EVENT_FETCH_SIZE;
 
-        System.out.println("FETCH " + events.size());
+//        System.out.println("FETCH " + events.size());
 
         // Load more in this screen
         if (adapter != null && adapter.events != null && adapter.events.size() != 0) {
@@ -97,4 +97,10 @@ public class AgendaActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
+    }
 }

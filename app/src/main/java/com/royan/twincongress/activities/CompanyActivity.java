@@ -54,7 +54,7 @@ public class CompanyActivity extends CompanyBaseActivity {
                 DataEntries.Ordinary_Company, DataType.OrdinaryCompany);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -65,8 +65,8 @@ public class CompanyActivity extends CompanyBaseActivity {
             fetchData();
         }
 
-        for (Company c : DataEntries.Ordinary_Company)
-            System.out.println(c.id + " " + c.website);
+//        for (Company c : DataEntries.Ordinary_Company)
+//            System.out.println(c.id + " " + c.website);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class CompanyActivity extends CompanyBaseActivity {
 
         COMPANY_FETCH_OFFSET[COMPANY_ORDINARY] += companies.size();
 
-        System.out.println("FETCH " + companies.size());
+//        System.out.println("FETCH " + companies.size());
 
         // Load more in this screen
         if (adapter != null && adapter.dataType == DataType.OrdinaryCompany &&
@@ -105,5 +105,12 @@ public class CompanyActivity extends CompanyBaseActivity {
             for (Company c : companies)
                 DataEntries.Ordinary_Company.add(c);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
     }
 }

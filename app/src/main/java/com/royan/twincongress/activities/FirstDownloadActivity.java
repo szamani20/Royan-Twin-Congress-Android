@@ -68,7 +68,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
     public void downloadAction(View v) {
         final Boolean isConnected = checkForInternet();
         if (!isConnected)
-            showSnackbar(FirstDownloadActivity.this, v, "Update", Snackbar.LENGTH_SHORT);
+            showSnackbar(FirstDownloadActivity.this, v,
+                    getResources().getString(R.string.no_internet), Snackbar.LENGTH_SHORT);
         else {
             downloadButton.setEnabled(false);
             new FirstDownloadTask(FirstDownloadActivity.this).execute();
@@ -148,7 +149,7 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                                             final List<List<Winner>> winnerList,
                                             final List<List<Company>> companiesList,
                                             final List<Event> eventList) {
-        System.out.println("Finished");
+//        System.out.println("Finished");
 
         if (realm == null)
             realm = Realm.getDefaultInstance();
@@ -181,8 +182,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
 
                         speaker.aabstract = aabstract;
 
-                        System.out.println(speaker.congress + " " +
-                                speaker.type + " " + speaker.id + " " + speaker.name);
+//                        System.out.println(speaker.congress + " " +
+//                                speaker.type + " " + speaker.id + " " + speaker.name);
                     }
                 }
 
@@ -257,4 +258,5 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
         SharedPreferencesHelper.setDataDownloaded(getApplicationContext(), true);
         startActivity(new Intent(FirstDownloadActivity.this, MainActivity.class));
     }
+
 }

@@ -41,10 +41,10 @@ public class FetchWinners {
 
             FetchBodyRequest bodyRequest = new FetchBodyRequest(
                     winnerType, start_id, end_id);
-            System.out.println(base_url);
-            System.out.println(gson.toJson(bodyRequest));
+//            System.out.println(base_url);
+//            System.out.println(gson.toJson(bodyRequest));
             String result_string = postUrlString(base_url, gson.toJson(bodyRequest));
-            System.out.println(result_string);
+//            System.out.println(result_string);
             return gson.fromJson(result_string, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,11 +61,11 @@ public class FetchWinners {
 
             String base_url = setBaseUrl("https://royan.szamani.ir/", type);
             String result_string = getUrlString(base_url);
-            System.out.println(result_string);
+//            System.out.println(result_string);
 
             List<Winner> res = gson.fromJson(result_string, collectionType);
-            for (Winner w : res)
-                System.out.println(w.type + " " + w.name);
+//            for (Winner w : res)
+//                System.out.println(w.type + " " + w.name);
             return res;
         } catch (IOException e) {
             e.printStackTrace();

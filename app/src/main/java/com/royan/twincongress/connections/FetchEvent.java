@@ -49,7 +49,7 @@ public class FetchEvent {
 
             String base_url = "https://royan.szamani.ir/agenda/all_events/";
             String result_string = getUrlString(base_url);
-            System.out.println(result_string);
+//            System.out.println(result_string);
 
             List<Event> res = gson.fromJson(result_string, collectionType);
 //            for (Event e : res)

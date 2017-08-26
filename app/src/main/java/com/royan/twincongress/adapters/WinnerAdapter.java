@@ -1,8 +1,10 @@
 package com.royan.twincongress.adapters;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +18,9 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.activities.WinnerDetailActivity;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FirstLetterDrawableHelper;
 import com.royan.twincongress.helpers.FontHelper;
-import com.royan.twincongress.helpers.RandomHelper;
+import com.royan.twincongress.helpers.SnackBarHelper;
 import com.royan.twincongress.models.DataType;
 import com.royan.twincongress.models.Winner;
 import com.royan.twincongress.picassoHelper.CircleTransform;
@@ -77,9 +80,8 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
         if (winner.award_venue == null || winner.award_venue.length() == 0)
             holder.winnerVenueLayout.setVisibility(View.GONE);
 
-        int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
-                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
-        holder.topBorder.setBackgroundColor(randomColor);
+        TextDrawable drawable = FirstLetterDrawableHelper
+                .getBigDrawable(winner.name.substring(0, 1), context, holder.topBorder);
 
         if (winner.avatar != null &&
                 winner.avatar.length() != 0)
@@ -87,15 +89,9 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
                     .transform(new CircleTransform())
                     .resize(120, 120)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_landscape)
+                    .placeholder(drawable)
                     .into(holder.winnerAvatar);
         else {
-            String letter = winner.name.substring(0, 1);
-            if (winner.name.startsWith("Prof") ||
-                    winner.name.startsWith("prof") && winner.name.length() > 6)
-                letter = winner.name.substring(6, 7);
-            TextDrawable drawable = TextDrawable.builder()
-                    .buildRound(letter, randomColor);
             holder.winnerAvatar.setImageDrawable(drawable);
         }
 
@@ -106,6 +102,34 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.WinnerView
                 intent.putExtra(Constants.WINNER_ID, winner.id - 1);
                 intent.putExtra(Constants.WINNER_TYPE, winner.type);
                 context.startActivity(intent);
+            }
+        });
+
+        holder.winnerName.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Winner Name", winner.name);
+                clipboard.setPrimaryClip(clip);
+                SnackBarHelper.showSnackbar(context, v,
+                        context.getResources().getString(R.string.copied_to_clipboard),
+                        Snackbar.LENGTH_SHORT);
+
+                return true;
+            }
+        });
+
+        holder.winnerEmail.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Winner Email", winner.email);
+                clipboard.setPrimaryClip(clip);
+                SnackBarHelper.showSnackbar(context, v,
+                        context.getResources().getString(R.string.copied_to_clipboard),
+                        Snackbar.LENGTH_SHORT);
+
+                return true;
             }
         });
     }

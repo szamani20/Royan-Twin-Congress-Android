@@ -27,9 +27,9 @@ import io.realm.Realm;
 public class MyPushListener extends PusheListenerService {
     @Override
     public void onMessageReceived(JSONObject json, JSONObject messageContent) {
-        System.out.println("#####################################################################");
-        System.out.println(json.toString());  // custom content!
-        System.out.println(messageContent.toString());
+//        System.out.println("#####################################################################");
+//        System.out.println(json.toString());  // custom content!
+//        System.out.println(messageContent.toString());
 
         processJsonData(json.toString());
     }
@@ -37,7 +37,7 @@ public class MyPushListener extends PusheListenerService {
     private void processJsonData(String json) {
         Gson gson = new GsonBuilder().serializeNulls().create();
         PushedData data = gson.fromJson(json, PushedData.class);
-        System.out.println(data.id + " " + data.type + " " + data.sub_type + " " + data.model);
+//        System.out.println(data.id + " " + data.type + " " + data.sub_type + " " + data.model);
         // Currently i don't know why i serialize nulls and then check if there is one
         // Why just don't do these stuff?
         if (data == null ||
@@ -87,8 +87,8 @@ public class MyPushListener extends PusheListenerService {
         protected Void doInBackground(Void... params) {
             // TODO check for null
             fetched_event = new FetchEvent().getEventRange(id, id).get(0);
-            System.out.println("########################");
-            System.out.println(fetched_event.name);
+//            System.out.println("########################");
+//            System.out.println(fetched_event.name);
             Realm realm = Realm.getDefaultInstance();
             realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
@@ -137,8 +137,8 @@ public class MyPushListener extends PusheListenerService {
         protected Void doInBackground(Void... params) {
             // TODO check for null
             fetched_company = new FetchCompany().getCompanyRange(type, id, id).get(0);
-            System.out.println("########################");
-            System.out.println(fetched_company.name);
+//            System.out.println("########################");
+//            System.out.println(fetched_company.name);
             Realm realm = Realm.getDefaultInstance();
             realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
@@ -190,8 +190,8 @@ public class MyPushListener extends PusheListenerService {
         protected Void doInBackground(Void... params) {
             // TODO check for null
             fetched_winner = new FetchWinners().getWinnerRange(type, id, id).get(0);
-            System.out.println("########################");
-            System.out.println(fetched_winner.aabstract.background);
+//            System.out.println("########################");
+//            System.out.println(fetched_winner.aabstract.background);
             Realm realm = Realm.getDefaultInstance();
             realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
@@ -267,8 +267,8 @@ public class MyPushListener extends PusheListenerService {
         protected Void doInBackground(Void... params) {
             // TODO check for null
             fetched_speaker = new FetchCongress().getSpeakerRange(congress, type, id, id).get(0);
-            System.out.println("########################");
-            System.out.println(fetched_speaker.aabstract.background);
+//            System.out.println("########################");
+//            System.out.println(fetched_speaker.aabstract.background);
             Realm realm = Realm.getDefaultInstance();
             realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override

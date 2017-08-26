@@ -50,9 +50,9 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
                                 .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
                                 .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
                                 .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
-                                .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                .titleTextSize(30)                  // Specify the size (in sp) of the title text
                                 .titleTextColor(R.color.scc_color)      // Specify the color of the title text
-                                .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                .descriptionTextSize(20)            // Specify the size (in sp) of the description text
                                 .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
                                 .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
                                 .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
@@ -232,7 +232,7 @@ public abstract class CongressBaseActivity extends AppCompatActivity {
                         true, new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                                System.out.println("ABSTRACT? " + input.toString());
+//                                System.out.println("ABSTRACT? " + input.toString());
                                 searchCriteria = input.toString();
                                 Intent intent = new Intent(CongressBaseActivity.this, SearchResultActivity.class);
                                 intent.putExtra(Constants.SEARCH_CRITERIA, searchCriteria);

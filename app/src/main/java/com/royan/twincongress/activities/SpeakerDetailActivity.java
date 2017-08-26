@@ -1,6 +1,5 @@
 package com.royan.twincongress.activities;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,10 +13,12 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FirstLetterDrawableHelper;
 import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.SharedPreferencesHelper;
 import com.royan.twincongress.models.Speaker;
 import com.royan.twincongress.picassoHelper.CircleTransform;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -61,9 +62,9 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
                         .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
                         .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
                         .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
-                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextSize(30)                  // Specify the size (in sp) of the title text
                         .titleTextColor(R.color.scc_color)      // Specify the color of the title text
-                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextSize(20)            // Specify the size (in sp) of the description text
                         .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
                         .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
                         .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
@@ -86,7 +87,7 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
         int congressType = getIntent().getIntExtra(Constants.CONGRESS_TYPE, 0);
         int speakerID = getIntent().getIntExtra(Constants.SPEAKER_ID, 0);
 
-        System.out.println("HELLLLO " + speakerType + " " + congressType + " " + speakerID);
+//        System.out.println("HELLLLO " + speakerType + " " + congressType + " " + speakerID);
 
         try {
             switch (congressType) {
@@ -153,26 +154,24 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
 
     protected void bindViewData() {
         mTitle.setText(speaker.name);
+
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+        TextDrawable drawable = FirstLetterDrawableHelper
+                .getSmallDrawable(speaker.name.substring(0, 1), this);
+
+//        System.out.println("#####################   " + speaker.name + "  " + drawable.getIntrinsicWidth() + " " + drawable.getIntrinsicHeight());
+
         if (speaker.avatar != null &&
                 speaker.avatar.length() != 0)
             Picasso.with(this)
                     .load(speaker.avatar)
                     .transform(new CircleTransform())
-                    .resize(110, 110)
+                    .resize(50, 50)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_landscape)
+                    .placeholder(drawable)
                     .into(avatar);
         else {
-            String letter = speaker.name.substring(0, 1);
-            if (speaker.name.startsWith("Prof") ||
-                    speaker.name.startsWith("prof") && speaker.name.length() > 6)
-                letter = speaker.name.substring(6, 7);
-            TextDrawable drawable = TextDrawable.builder()
-                    .beginConfig()
-                    .width(110)
-                    .height(110)
-                    .endConfig()
-                    .buildRound(letter, getIntent().getIntExtra(Constants.RANDOM_COLOR, R.color.material_amber_500));
             avatar.setImageDrawable(drawable);
         }
     }
@@ -182,7 +181,7 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
         getMenuInflater().inflate(R.menu.menu_speaker_detail, menu);
         bookmarkMenu = menu.getItem(0);
         if (speaker == null) {
-            System.out.println("SPEAKER NULL");
+//            System.out.println("SPEAKER NULL");
             return true;
         }
         if (speaker.bookmarked != null && speaker.bookmarked)
@@ -193,7 +192,7 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        System.out.println(speaker.bookmarked);
+//        System.out.println(speaker.bookmarked);
         switch (item.getItemId()) {
             case R.id.menu_bookmark:
                 if (speaker.bookmarked != null && speaker.bookmarked) {
@@ -221,5 +220,12 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
     }
 }

@@ -96,12 +96,19 @@ public class BookmarkActivity extends AppCompatActivity {
         adapter = new SpeakerAdapter(this, bookmarks, null);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initBookmarks();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
     }
 }

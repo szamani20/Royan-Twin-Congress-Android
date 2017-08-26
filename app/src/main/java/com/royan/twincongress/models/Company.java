@@ -12,6 +12,7 @@ public class Company extends RealmObject {
     public Integer type; // 0 --> Sponsor (SP), 1 --> Ordinary (OR)
     public String name;
     public String website;
+    public String description;
     public String logo;
     public String location;
     public String phone;

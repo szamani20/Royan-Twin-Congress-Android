@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getkeepsafe.taptargetview.TapTarget;
@@ -33,16 +34,14 @@ import butterknife.OnClick;
 import static com.royan.twincongress.helpers.SnackBarHelper.showSnackbar;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.SCCCardView)
-    CardView SCCCardView;
-    @BindView(R.id.RBCCardView)
-    CardView RBCCardView;
-    @BindView(R.id.nurseCardView)
-    CardView AKPCardView;
-    @BindView(R.id.AKPCardView)
-    CardView nurseCardView;
-    @BindView(R.id.toolbar_layout)
-    CollapsingToolbarLayout toolbar_layout;
+    @BindView(R.id.rbcImageView)
+    ImageView rbcImageView;
+    @BindView(R.id.sccImageView)
+    ImageView sccImageView;
+    @BindView(R.id.nurseImageView)
+    ImageView nurseImageView;
+    @BindView(R.id.awardImageView)
+    ImageView awardImageView;
     private Drawer drawer;
 
     @Override
@@ -57,12 +56,6 @@ public class MainActivity extends AppCompatActivity {
         setupDrawer(toolbar);
         setupTapTarget();
         FontHelper.applyDefaultFont(findViewById(R.id.activity_main));
-        toolbar_layout.setCollapsedTitleTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/AvenirLTStd-Black.otf"
-        ));
-        toolbar_layout.setExpandedTitleTypeface(Typeface.createFromAsset(
-                getAssets(), "fonts/AvenirLTStd-Black.otf"
-        ));
     }
 
     private void setupTapTarget() {
@@ -78,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                         .outerCircleColor(R.color.nc_color)      // Specify a color for the outer circle
                         .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
                         .targetCircleColor(R.color.rbc_color)   // Specify a color for the target circle
-                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        .titleTextSize(30)                  // Specify the size (in sp) of the title text
                         .titleTextColor(R.color.scc_color)      // Specify the color of the title text
-                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        .descriptionTextSize(20)            // Specify the size (in sp) of the description text
                         .descriptionTextColor(R.color.colorAccent)  // Specify the color of the description text
                         .textColor(R.color.colorPrimary)            // Specify a color for both the title and description text
                         .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
@@ -99,22 +92,22 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.SCCCardView)
+    @OnClick(R.id.rbcImageView)
     public void startScc() {
-        startActivity(new Intent(MainActivity.this, SCCActivity.class));
-    }
-
-    @OnClick(R.id.RBCCardView)
-    public void startRbc() {
         startActivity(new Intent(MainActivity.this, RBCActivity.class));
     }
 
-    @OnClick(R.id.nurseCardView)
+    @OnClick(R.id.sccImageView)
+    public void startRbc() {
+        startActivity(new Intent(MainActivity.this, SCCActivity.class));
+    }
+
+    @OnClick(R.id.nurseImageView)
     public void startNc() {
         startActivity(new Intent(MainActivity.this, NurseActivity.class));
     }
 
-    @OnClick(R.id.AKPCardView)
+    @OnClick(R.id.awardImageView)
     public void startAkp() {
         startActivity(new Intent(MainActivity.this, AwardActivity.class));
     }
@@ -126,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         PrimaryDrawerItem item = new PrimaryDrawerItem()
-                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Heavy.otf"))
                 .withIdentifier(Constants.ITEM_BANNER).withName(R.string.app_name);
         SecondaryDrawerItem bookmarks = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
@@ -134,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 .withIdentifier(Constants.ITEM_BOOKMARKS).withName(R.string.bookmarks);
         SecondaryDrawerItem agenda = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
-                .withIcon(R.drawable.ic_view_agenda_black_24dp)
+                .withIcon(R.drawable.agenda_icon)
                 .withIdentifier(Constants.ITEM_AGENDA).withName(R.string.agenda);
         SecondaryDrawerItem companies = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
@@ -142,12 +135,20 @@ public class MainActivity extends AppCompatActivity {
                 .withIdentifier(Constants.ITEM_COMPANIES).withName(R.string.companies);
         SecondaryDrawerItem sponsors = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
-                .withIcon(R.drawable.ic_format_list_numbered_black_24dp)
+                .withIcon(R.drawable.ic_format_list_bulleted_black_24dp)
                 .withIdentifier(Constants.ITEM_SPONSORS).withName(R.string.sponsors);
-        SecondaryDrawerItem map = new SecondaryDrawerItem()
+        SecondaryDrawerItem grandFloorMap = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_map_black_24dp)
-                .withIdentifier(Constants.ITEM_MAP).withName(R.string.map);
+                .withIdentifier(Constants.ITEM_MAP_GRAND).withName(R.string.grand_floor_map);
+        SecondaryDrawerItem minus2Map = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
+                .withIcon(R.drawable.ic_map_black_24dp)
+                .withIdentifier(Constants.ITEM_MAP_SECOND).withName(R.string.second_floor_map);
+        SecondaryDrawerItem minus1Map = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
+                .withIcon(R.drawable.ic_map_black_24dp)
+                .withIdentifier(Constants.ITEM_MAP_FIRST).withName(R.string.first_floor_map);
 
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -161,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
                         agenda,
                         companies,
                         sponsors,
-                        map
+                        grandFloorMap,
+                        minus1Map,
+                        minus2Map
                 )
                 .withSelectedItem(-1)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -183,8 +186,20 @@ public class MainActivity extends AppCompatActivity {
                             case Constants.ITEM_SPONSORS:
                                 startActivity(new Intent(MainActivity.this, SponsorActivity.class));
                                 break;
-                            case Constants.ITEM_MAP:
-                                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                            case Constants.ITEM_MAP_GRAND:
+                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                intent.putExtra(Constants.MAP_TYPE, Constants.ITEM_MAP_GRAND);
+                                startActivity(intent);
+                                break;
+                            case Constants.ITEM_MAP_FIRST:
+                                Intent intent1 = new Intent(MainActivity.this, MapActivity.class);
+                                intent1.putExtra(Constants.MAP_TYPE, Constants.ITEM_MAP_FIRST);
+                                startActivity(intent1);
+                                break;
+                            case Constants.ITEM_MAP_SECOND:
+                                Intent intent2 = new Intent(MainActivity.this, MapActivity.class);
+                                intent2.putExtra(Constants.MAP_TYPE, Constants.ITEM_MAP_SECOND);
+                                startActivity(intent2);
                                 break;
                         }
                         return true;

@@ -1,6 +1,5 @@
 package com.royan.twincongress.activities;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +8,7 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
 import com.royan.twincongress.dataEntries.DataEntries;
 import com.royan.twincongress.helpers.Constants;
+import com.royan.twincongress.helpers.FirstLetterDrawableHelper;
 import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.models.Winner;
 import com.royan.twincongress.picassoHelper.CircleTransform;
@@ -47,8 +47,6 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
         int winnerID = getIntent().getIntExtra(Constants.WINNER_ID, 0);
         int winnerType = getIntent().getIntExtra(Constants.WINNER_TYPE, 0);
 
-        System.out.println("HIIII " + winnerType + " " + winnerID);
-
         try {
             switch (winnerType) {
                 case 0:
@@ -81,28 +79,27 @@ public class WinnerDetailActivity extends PersonDetailBaseActivity {
     @Override
     protected void bindViewData() {
         mTitle.setText(winner.name);
+        TextDrawable drawable = FirstLetterDrawableHelper
+                .getSmallDrawable(winner.name.substring(0, 1), this);
 
         if (winner.avatar != null &&
                 winner.avatar.length() != 0)
             Picasso.with(this)
                     .load(winner.avatar)
                     .transform(new CircleTransform())
-                    .resize(110, 110)
+                    .resize(50, 50)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_landscape)
+                    .placeholder(drawable)
                     .into(avatar);
         else {
-            String letter = winner.name.substring(0, 1);
-            if (winner.name.startsWith("Prof") ||
-                    winner.name.startsWith("prof") && winner.name.length() > 6)
-                letter = winner.name.substring(6, 7);
-            TextDrawable drawable = TextDrawable.builder()
-                    .beginConfig()
-                    .width(110)
-                    .height(110)
-                    .endConfig()
-                    .buildRound(letter, Color.RED);
             avatar.setImageDrawable(drawable);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
     }
 }

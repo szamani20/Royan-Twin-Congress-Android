@@ -74,7 +74,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 DataType.Search);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class SearchResultActivity extends AppCompatActivity {
         String s2 = searchCriteria + "*";
         String s3 = "*" + searchCriteria + "*";
 
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + " " + congressType);
+//        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + " " + congressType);
 
         OrderedRealmCollection<Speaker> speakers =
                 realm.where(Speaker.class)
@@ -144,12 +144,22 @@ public class SearchResultActivity extends AppCompatActivity {
             return null;
 
         List<Speaker> searchResults = new ArrayList<>();
+        int i = 0;
+        System.out.println(speakers.size());
         for (Speaker s : speakers) {
-            System.out.println(s.congress + " " +
-                    s.type + " " + s.id + " " + s.name);
+            if (i >= 200)
+                break;
             searchResults.add(s);
+            ++i;
         }
 
         return searchResults;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        if (realm != null)
+//            realm.close();
     }
 }

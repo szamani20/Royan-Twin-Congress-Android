@@ -61,7 +61,7 @@ public class NurseActivity extends CongressBaseActivity {
                 DataType.InvitedSpeaker);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -155,17 +155,17 @@ public class NurseActivity extends CongressBaseActivity {
 
         SPEAKER_FETCH_OFFSET[congress][type] += speakers.size();
 
-        System.out.println("FETCH " + speakers.size());
+//        System.out.println("FETCH " + speakers.size());
 
         switch (type) {
             case Constants.IS_SPEAKER:
                 // Load more in this tab
                 if (adapter != null && adapter.dataType == DataType.InvitedSpeaker &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.Nurse_IS_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -183,10 +183,10 @@ public class NurseActivity extends CongressBaseActivity {
             case Constants.OP_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.OralPresentation &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.Nurse_OP_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -200,10 +200,10 @@ public class NurseActivity extends CongressBaseActivity {
             case Constants.POSTER_SPEAKER:
                 if (adapter != null && adapter.dataType == DataType.Poster &&
                         adapter.speakers != null && adapter.speakers.size() != 0) {
-                    System.out.println("BEFORE: " + adapter.speakers.size());
+//                    System.out.println("BEFORE: " + adapter.speakers.size());
                     for (Speaker s : speakers)
                         adapter.speakers.add(s);
-                    System.out.println("AFTER: " + adapter.speakers.size());
+//                    System.out.println("AFTER: " + adapter.speakers.size());
                     DataEntries.Nurse_Poster_Speaker = adapter.speakers;
 
                     adapter.notifyDataSetChanged();
@@ -241,7 +241,7 @@ public class NurseActivity extends CongressBaseActivity {
 //                        .like("aabstract.keyword", searchCriteria, Case.INSENSITIVE)
                         .findAllSorted("type");
 
-        System.out.println("SEARCH: " + DataEntries.Nurse_Search_Result.size());
+//        System.out.println("SEARCH: " + DataEntries.Nurse_Search_Result.size());
 
         adapter.speakers = DataEntries.Nurse_Search_Result;
         adapter.dataType = DataType.Search;
@@ -251,7 +251,8 @@ public class NurseActivity extends CongressBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        realm.close();
+//        if (realm != null)
+//            realm.close();
     }
 
 }
