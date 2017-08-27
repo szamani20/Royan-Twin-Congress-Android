@@ -70,7 +70,7 @@ public class AgendaActivity extends AppCompatActivity {
         OrderedRealmCollection<Event> events =
                 realm.where(Event.class)
                         .between("id", EVENT_FETCH_OFFSET, EVENT_FETCH_OFFSET + EVENT_FETCH_SIZE)
-                        .findAllSorted("id");
+                        .findAllSorted("sortCriteria");
 
         if (events == null ||
                 events.size() == 0)

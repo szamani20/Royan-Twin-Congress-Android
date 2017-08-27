@@ -12,6 +12,7 @@ public class Event extends RealmObject {
     public String topic;
     public String time;
     public String venue;
+    public String sortCriteria;
 
     public Event(Integer id, String name, String topic, String time, String venue) {
         this.id = id;

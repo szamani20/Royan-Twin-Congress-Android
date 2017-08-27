@@ -62,6 +62,8 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
         super.onDestroy();
 //        if (realm != null)
 //            realm.close();
+//        finish();
+//        System.exit(0);
     }
 
     @OnClick(R.id.downloadButton)
@@ -252,6 +254,11 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                     event.topic = eventList.get(i).topic;
                     event.time = eventList.get(i).time;
                     event.venue = eventList.get(i).venue;
+                    event.sortCriteria = event.time;
+                    if (event.time != null && event.time.length() > 15)
+                        event.sortCriteria = event.time.substring(4, 5)
+                                + event.time.substring(8, 10)
+                                + event.time.substring(11);
 
 //                    System.out.println(event.id + " " +
 //                            event.name + " " + event.topic);

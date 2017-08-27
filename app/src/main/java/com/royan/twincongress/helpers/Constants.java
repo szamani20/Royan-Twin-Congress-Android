@@ -22,11 +22,12 @@ public class Constants {
     public static final int ITEM_BANNER = 2;
     public static final int ITEM_BOOKMARKS = 3;
     public static final int ITEM_AGENDA = 4;
-    public static final int ITEM_COMPANIES = 5;
-    public static final int ITEM_SPONSORS = 6;
-    public static final int ITEM_MAP_GRAND = 7;
-    public static final int ITEM_MAP_SECOND = 8;
-    public static final int ITEM_MAP_FIRST = 9;
+    public static final int ITEM_AGENDA_DOWNLOAD = 5;
+    public static final int ITEM_COMPANIES = 6;
+    public static final int ITEM_SPONSORS = 7;
+    public static final int ITEM_MAP_GRAND = 8;
+    public static final int ITEM_MAP_SECOND = 9;
+    public static final int ITEM_MAP_FIRST = 10;
 
     public static final int BACKGROUND = 0;
     public static final int OBJECTIVE = 1;

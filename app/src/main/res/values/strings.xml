@@ -38,6 +38,7 @@
     <string name="second_floor_map">Floor -2 map</string>
     <string name="first_floor_map">Floor -1 map</string>
     <string name="copied_to_clipboard">Copied to Clipboard</string>
+    <string name="agenda_download">Download Agenda as PDF</string>
 
     <array name="congress_search_items">
         <item>Invited Speakers</item>

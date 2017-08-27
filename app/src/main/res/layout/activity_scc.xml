@@ -28,9 +28,9 @@
         android:layout_alignParentBottom="true"
         android:background="@color/material_blue_300"
         app:bb_activeTabAlpha="1"
-        app:bb_activeTabColor="@color/material_red_900"
+        app:bb_activeTabColor="@color/material_gray_900"
         app:bb_inActiveTabAlpha="0.6"
-        app:bb_inActiveTabColor="@color/material_red_500"
+        app:bb_inActiveTabColor="@color/material_grey_200"
         app:bb_tabXmlResource="@xml/congress_bottombar_tabs" />
 
 </RelativeLayout>

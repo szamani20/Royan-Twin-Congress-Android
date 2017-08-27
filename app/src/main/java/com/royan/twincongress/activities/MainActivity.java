@@ -2,6 +2,7 @@ package com.royan.twincongress.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -129,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.agenda_icon)
                 .withIdentifier(Constants.ITEM_AGENDA).withName(R.string.agenda);
+        SecondaryDrawerItem agendaDownload = new SecondaryDrawerItem()
+                .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
+                .withIcon(R.drawable.ic_file_download_black_24dp)
+                .withIdentifier(Constants.ITEM_AGENDA_DOWNLOAD).withName(R.string.agenda_download);
         SecondaryDrawerItem companies = new SecondaryDrawerItem()
                 .withTypeface(Typeface.createFromAsset(getAssets(), "fonts/AvenirLTStd-Light.otf"))
                 .withIcon(R.drawable.ic_format_list_bulleted_black_24dp)
@@ -160,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                         new DividerDrawerItem(),
                         bookmarks,
                         agenda,
+                        agendaDownload,
                         companies,
                         sponsors,
                         grandFloorMap,
@@ -179,6 +185,10 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case Constants.ITEM_AGENDA:
                                 startActivity(new Intent(MainActivity.this, AgendaActivity.class));
+                                break;
+                            case Constants.ITEM_AGENDA_DOWNLOAD:
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
+                                startActivity(browserIntent);
                                 break;
                             case Constants.ITEM_COMPANIES:
                                 startActivity(new Intent(MainActivity.this, CompanyActivity.class));
@@ -220,5 +230,12 @@ public class MainActivity extends AppCompatActivity {
             drawer.setSelection(-1);
             drawer.closeDrawer();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        finish();
+//        System.exit(0);
     }
 }

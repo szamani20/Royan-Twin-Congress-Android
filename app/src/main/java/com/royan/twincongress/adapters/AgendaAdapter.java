@@ -51,12 +51,31 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.eventName.setText(event.name);
         holder.eventTopic.setText(event.topic);
         holder.eventVenue.setText(event.venue);
-
-        holder.eventName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/AvenirLTStd-Heavy.otf"));
+        boolean exec = false;
 
         int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
                 RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
 
+        if (events.size() > position + 1 &&
+                event.time.equals(events.get(position + 1).time)) {
+            exec = true;
+            holder.timelineView.setMarker(
+                    context.getResources().getDrawable(R.drawable.agenda_marker_same_time));
+        }
+
+        if (position > 0 &&
+                event.time.equals(events.get(position - 1).time)) {
+            exec = true;
+            holder.timelineView.setMarker(
+                    context.getResources().getDrawable(R.drawable.agenda_marker_same_time));
+        }
+
+        if (!exec) {
+            holder.timelineView.setMarker(
+                    context.getResources().getDrawable(R.drawable.agenda_marker));
+        }
+
+        holder.eventName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/AvenirLTStd-Heavy.otf"));
         holder.topBorder.setBackgroundColor(randomColor);
     }
 
