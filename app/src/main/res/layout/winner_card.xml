@@ -185,7 +185,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_margin="5dp"
-                    android:src="@drawable/country_icon" />
+                    android:src="@drawable/affiliation_icon" />
 
                 <TextView
                     android:id="@+id/winnerAffiliation"
@@ -207,7 +207,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_margin="5dp"
-                    android:src="@drawable/country_icon" />
+                    android:src="@drawable/topic_icon" />
 
                 <TextView
                     android:id="@+id/winnerShortCV"

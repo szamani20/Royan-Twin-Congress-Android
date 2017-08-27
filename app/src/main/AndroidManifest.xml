@@ -32,7 +32,6 @@
         <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
-
                 <data
                     android:path="com.royan.twincongress"
                     android:scheme="package" />

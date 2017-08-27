@@ -83,6 +83,8 @@ public class SpeakerAdapter extends
             holder.speakerTimeLayout.setVisibility(View.GONE);
         if (speaker.venue == null || speaker.venue.length() == 0)
             holder.speakerVenueLayout.setVisibility(View.GONE);
+        if (dataType == DataType.Poster)
+            holder.speakerVenueLayout.setVisibility(View.GONE);
 
         System.out.println(speaker.id + " " + speaker.name);
 

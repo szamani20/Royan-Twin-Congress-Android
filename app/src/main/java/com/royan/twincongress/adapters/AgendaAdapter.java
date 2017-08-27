@@ -53,9 +53,6 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.eventVenue.setText(event.venue);
         boolean exec = false;
 
-        int randomColor = context.getResources().getIntArray(R.array.top_bar_colors)[
-                RandomHelper.random.nextInt(context.getResources().getIntArray(R.array.top_bar_colors).length)];
-
         if (events.size() > position + 1 &&
                 event.time.equals(events.get(position + 1).time)) {
             exec = true;
@@ -75,15 +72,24 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
                     context.getResources().getDrawable(R.drawable.agenda_marker));
         }
 
-        if (event.venue.contains("Hafez") || event.venue.contains("hafez"))
+        if (event.venue.contains("Hafez") || event.venue.contains("hafez")) {
             holder.eventVenue.setTextColor(context.getResources().getColor(R.color.hafez_color));
-        if (event.venue.contains("Rudaki") || event.venue.contains("rudaki"))
+            holder.timelineView.setMarkerColor(context.getResources().getColor(R.color.hafez_color));
+            holder.topBorder.setBackgroundColor(context.getResources().getColor(R.color.hafez_color));
+        }
+        if (event.venue.contains("Rudaki") || event.venue.contains("rudaki")) {
             holder.eventVenue.setTextColor(context.getResources().getColor(R.color.rudaki_color));
-        if (event.venue.contains("Saadi") || event.venue.contains("saadi"))
+            holder.timelineView.setMarkerColor(context.getResources().getColor(R.color.rudaki_color));
+            holder.topBorder.setBackgroundColor(context.getResources().getColor(R.color.rudaki_color));
+        }
+        if (event.venue.contains("Saadi") || event.venue.contains("saadi")) {
             holder.eventVenue.setTextColor(context.getResources().getColor(R.color.saadi_color));
+            holder.timelineView.setMarkerColor(context.getResources().getColor(R.color.saadi_color));
+            holder.topBorder.setBackgroundColor(context.getResources().getColor(R.color.saadi_color));
+        }
 
         holder.eventName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/AvenirLTStd-Heavy.otf"));
-        holder.topBorder.setBackgroundColor(randomColor);
+
     }
 
     @Override

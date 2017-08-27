@@ -182,10 +182,14 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                         speaker.time = speakerList.get(i).get(j).time;
                         speaker.venue = speakerList.get(i).get(j).venue;
                         speaker.sortCriteria = speaker.time;
-                        if (speaker.time != null && speaker.time.length() > 15)
+                        if (speaker.time != null && speaker.time.length() > 15) {
                             speaker.sortCriteria = speaker.time.substring(4, 5)
                                     + speaker.time.substring(8, 10)
                                     + speaker.time.substring(11);
+                            int index = speaker.time.indexOf(":00 2017");
+                            if (index != -1)
+                                speaker.time = speaker.time.substring(0, index);
+                        }
 
                         speaker.aabstract = aabstract;
 
@@ -216,6 +220,12 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                         winner.short_cv = winnerList.get(i).get(j).short_cv;
                         winner.award_time = winnerList.get(i).get(j).award_time;
                         winner.award_venue = winnerList.get(i).get(j).award_venue;
+
+                        if (winner.award_time != null && winner.award_time.length() > 15) {
+                            int index = winner.award_time.indexOf(":00 2017");
+                            if (index != -1)
+                                winner.award_time = winner.award_time.substring(0, index);
+                        }
 
                         winner.aabstract = aabstract;
 
@@ -255,10 +265,15 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                     event.time = eventList.get(i).time;
                     event.venue = eventList.get(i).venue;
                     event.sortCriteria = event.time;
-                    if (event.time != null && event.time.length() > 15)
+                    if (event.time != null && event.time.length() > 15) {
                         event.sortCriteria = event.time.substring(4, 5)
                                 + event.time.substring(8, 10)
                                 + event.time.substring(11);
+
+                        int index = event.time.indexOf(":00 2017");
+                        if (index != -1)
+                            event.time = event.time.substring(0, index);
+                    }
 
 //                    System.out.println(event.id + " " +
 //                            event.name + " " + event.topic);
