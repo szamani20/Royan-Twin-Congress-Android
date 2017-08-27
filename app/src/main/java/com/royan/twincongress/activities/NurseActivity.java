@@ -146,7 +146,7 @@ public class NurseActivity extends CongressBaseActivity {
                         .equalTo("congress", congress)
                         .equalTo("type", type)
                         .between("id", SPEAKER_FETCH_OFFSET[congress][type], SPEAKER_FETCH_OFFSET[congress][type] + SPEAKER_FETCH_SIZE)
-                        .findAllSorted("id");
+                        .findAllSorted("sortCriteria");
 
         // No more data for this tab
         if (speakers == null ||

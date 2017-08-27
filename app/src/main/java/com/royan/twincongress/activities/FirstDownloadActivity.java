@@ -179,11 +179,16 @@ public class FirstDownloadActivity extends AppCompatActivity implements OnFirstD
                         speaker.topic = speakerList.get(i).get(j).topic;
                         speaker.time = speakerList.get(i).get(j).time;
                         speaker.venue = speakerList.get(i).get(j).venue;
+                        speaker.sortCriteria = speaker.time;
+                        if (speaker.time != null && speaker.time.length() > 15)
+                            speaker.sortCriteria = speaker.time.substring(4, 5)
+                                    + speaker.time.substring(8, 10)
+                                    + speaker.time.substring(11);
 
                         speaker.aabstract = aabstract;
 
-//                        System.out.println(speaker.congress + " " +
-//                                speaker.type + " " + speaker.id + " " + speaker.name);
+                        System.out.println(speaker.congress + " " +
+                                speaker.type + " " + speaker.id + " " + speaker.sortCriteria);
                     }
                 }
 

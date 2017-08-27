@@ -20,6 +20,7 @@ public class Speaker extends RealmObject {
     public String topic;
     public String time;
     public String venue;
+    public String sortCriteria;
     public Boolean bookmarked; // excluded when GSONing
     public Abstract aabstract;
 
