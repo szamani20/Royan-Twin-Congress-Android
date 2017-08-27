@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Twin Congress</string>
+    <string name="app_name">Royan Congress</string>
     <string name="verification_hint">Verification Code</string>
     <string name="verify_button">Verify</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="stem_cell_congress">Stem Cell 13</string>
-    <string name="reproductive_biomedicine_congress">Reproductive 18</string>
+    <string name="stem_cell_congress">Stem Cell Congress</string>
+    <string name="reproductive_biomedicine_congress">Reproductive Congress</string>
     <string name="awards">Awards</string>
-    <string name="agenda">Agenda</string>
+    <string name="agenda">Scientific Program</string>
     <string name="companies">Companies</string>
     <string name="map">Map</string>
     <string name="update">Update data</string>
@@ -31,14 +31,14 @@
     <string name="keyword">Keyword</string>
     <string name="bookmark">Bookmark</string>
     <string name="navigation_drawer">Side drawer</string>
-    <string name="navigation_drawer_text">Access agenda, companies, sponsors etc. here</string>
+    <string name="navigation_drawer_text">Access Scientific Program, companies, sponsors etc. here</string>
     <string name="verification_code_wrong">Wrong Code</string>
     <string name="no_internet">No internet!</string>
     <string name="grand_floor_map">Grand floor map</string>
     <string name="second_floor_map">Floor -2 map</string>
     <string name="first_floor_map">Floor -1 map</string>
     <string name="copied_to_clipboard">Copied to Clipboard</string>
-    <string name="agenda_download">Download Agenda as PDF</string>
+    <string name="agenda_download">Download Scientific Program as PDF</string>
 
     <array name="congress_search_items">
         <item>Invited Speakers</item>

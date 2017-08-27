@@ -131,9 +131,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:maxLines="1" />
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -176,19 +174,49 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/speechAffiliation"
+            <LinearLayout
+                android:id="@+id/speakerAffiliationLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:lineSpacingExtra="2dp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/speechTopic"
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/affiliation_icon" />
+
+                <TextView
+                    android:id="@+id/speechAffiliation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/speakerTopicLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:lineSpacingExtra="2dp" />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/topic_icon" />
+
+                <TextView
+                    android:id="@+id/speechTopic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

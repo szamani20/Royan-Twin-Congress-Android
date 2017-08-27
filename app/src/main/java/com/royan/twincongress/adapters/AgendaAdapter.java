@@ -75,6 +75,13 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
                     context.getResources().getDrawable(R.drawable.agenda_marker));
         }
 
+        if (event.venue.contains("Hafez") || event.venue.contains("hafez"))
+            holder.eventVenue.setTextColor(context.getResources().getColor(R.color.hafez_color));
+        if (event.venue.contains("Rudaki") || event.venue.contains("rudaki"))
+            holder.eventVenue.setTextColor(context.getResources().getColor(R.color.rudaki_color));
+        if (event.venue.contains("Saadi") || event.venue.contains("saadi"))
+            holder.eventVenue.setTextColor(context.getResources().getColor(R.color.saadi_color));
+
         holder.eventName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/AvenirLTStd-Heavy.otf"));
         holder.topBorder.setBackgroundColor(randomColor);
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/akp_activity"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -11,8 +11,8 @@
         android:layout_height="@dimen/materialize_toolbar"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:minHeight="?attr/actionBarSize" />
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/winnerRView"
@@ -27,11 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height_with_text"
         android:layout_alignParentBottom="true"
-        android:background="@color/material_blue_300"
+        android:background="@color/colorPrimary"
         app:bb_activeTabAlpha="1"
-        app:bb_activeTabColor="@color/material_gray_900"
+        app:bb_activeTabColor="@color/black"
         app:bb_inActiveTabAlpha="0.6"
-        app:bb_inActiveTabColor="@color/material_grey_200"
+        app:bb_inActiveTabColor="@color/white"
         app:bb_tabXmlResource="@xml/award_bottombar_tabs"
         app:bb_titleTextAppearance="@style/bottomBarTextAppearance" />
 

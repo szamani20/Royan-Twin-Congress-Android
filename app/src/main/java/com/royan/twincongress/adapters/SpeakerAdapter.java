@@ -84,6 +84,8 @@ public class SpeakerAdapter extends
         if (speaker.venue == null || speaker.venue.length() == 0)
             holder.speakerVenueLayout.setVisibility(View.GONE);
 
+        System.out.println(speaker.id + " " + speaker.name);
+
         holder.speakerName.setTypeface(Typeface.createFromAsset(context.getAssets(),
                 "fonts/AvenirLTStd-Heavy.otf"));
 
@@ -107,7 +109,7 @@ public class SpeakerAdapter extends
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SpeakerDetailActivity.class);
-                intent.putExtra(Constants.SPEAKER_ID, speaker.id - 1);
+                intent.putExtra(Constants.SPEAKER_ID, speaker.id);
                 intent.putExtra(Constants.SPEAKER_TYPE, speaker.type);
                 intent.putExtra(Constants.CONGRESS_TYPE, speaker.congress);
                 context.startActivity(intent);

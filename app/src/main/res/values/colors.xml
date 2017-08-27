@@ -10,6 +10,10 @@
     <color name="rbc_color">#FFC107</color>
     <color name="nc_color">#FF9800</color>
 
+    <color name="hafez_color">@color/material_amber_500</color>
+    <color name="rudaki_color">@color/material_green_500</color>
+    <color name="saadi_color">@color/material_blue_500</color>
+
     <!-- MaterialDrawer DEFAULT colors -->
     <color name="material_drawer_background">#F9F9F9</color>
     <!-- Material DEFAULT text / items colors -->
@@ -33,6 +37,9 @@
         <item>@color/material_indigo_500</item>
         <item>@color/material_teal_500</item>
     </array>
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
 
     <!-- Red -->
     <color name="material_red_50" >#FFEBEE</color>

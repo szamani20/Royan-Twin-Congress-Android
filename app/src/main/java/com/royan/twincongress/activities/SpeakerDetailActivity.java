@@ -21,6 +21,8 @@ import com.royan.twincongress.picassoHelper.CircleTransform;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
@@ -82,6 +84,13 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
                 });
     }
 
+    private Speaker getSpeakerFromID(List<Speaker> speakerList, int id) {
+        for (Speaker s : speakerList)
+            if (s.id == id)
+                return s;
+        return speakerList.get(0);
+    }
+
     protected void initDataModel() {
         int speakerType = getIntent().getIntExtra(Constants.SPEAKER_TYPE, 0);
         int congressType = getIntent().getIntExtra(Constants.CONGRESS_TYPE, 0);
@@ -94,39 +103,39 @@ public class SpeakerDetailActivity extends PersonDetailBaseActivity {
                 case 0:
                     switch (speakerType) {
                         case 0:
-                            speaker = DataEntries.SCC_IS_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.SCC_IS_Speaker, speakerID);
                             break;
                         case 1:
-                            speaker = DataEntries.SCC_OP_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.SCC_OP_Speaker, speakerID);
                             break;
                         case 2:
-                            speaker = DataEntries.SCC_Poster_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.SCC_Poster_Speaker, speakerID);
                             break;
                     }
                     break;
                 case 1:
                     switch (speakerType) {
                         case 0:
-                            speaker = DataEntries.RBC_IS_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.RBC_IS_Speaker, speakerID);
                             break;
                         case 1:
-                            speaker = DataEntries.RBC_OP_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.RBC_OP_Speaker, speakerID);
                             break;
                         case 2:
-                            speaker = DataEntries.RBC_Poster_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.RBC_Poster_Speaker, speakerID);
                             break;
                     }
                     break;
                 case 2:
                     switch (speakerType) {
                         case 0:
-                            speaker = DataEntries.Nurse_IS_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.Nurse_IS_Speaker, speakerID);
                             break;
                         case 1:
-                            speaker = DataEntries.Nurse_OP_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.Nurse_OP_Speaker, speakerID);
                             break;
                         case 2:
-                            speaker = DataEntries.Nurse_Poster_Speaker.get(speakerID);
+                            speaker = getSpeakerFromID(DataEntries.Nurse_Poster_Speaker, speakerID);
                             break;
                     }
                     break;
