@@ -3,6 +3,7 @@ package com.royan.twincongress.adapters;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.royan.twincongress.R;
+import com.royan.twincongress.activities.CompanyDetailActivity;
+import com.royan.twincongress.helpers.Constants;
 import com.royan.twincongress.helpers.FirstLetterDrawableHelper;
 import com.royan.twincongress.helpers.FontHelper;
 import com.royan.twincongress.helpers.SnackBarHelper;
@@ -118,6 +121,18 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
                         Snackbar.LENGTH_SHORT);
 
                 return true;
+            }
+        });
+
+        holder.companyCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dataType == DataType.SponsorCompany) {
+                    Intent intent = new Intent(context, CompanyDetailActivity.class);
+                    intent.putExtra(Constants.COMPANY_ID, company.id);
+                    intent.putExtra(Constants.COMPANY_NAME, company.name);
+                    context.startActivity(intent);
+                }
             }
         });
     }

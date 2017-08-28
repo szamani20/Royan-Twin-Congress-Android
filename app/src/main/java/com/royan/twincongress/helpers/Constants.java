@@ -75,6 +75,8 @@ public class Constants {
     public static final int EVENT_FETCH_SIZE = 200;
     public static final String RANDOM_COLOR = "RANDOM_COLOR";
     public static final String MAP_TYPE = "MAP_TYPE";
+    public static final String COMPANY_ID = "COMPANY_ID";
+    public static final String COMPANY_NAME = "COMPANY_NAME";
     public static int EVENT_FETCH_OFFSET = 0;
 
     public static final String CONGRESS_TYPE = "CONGRESS_TYPE";

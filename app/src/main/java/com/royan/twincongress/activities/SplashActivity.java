@@ -15,16 +15,21 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
-                SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified and already downloaded
+        if (SharedPreferencesHelper.getDataDownloaded(getApplicationContext())) // already downloaded
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        else
+            startActivity(new Intent(SplashActivity.this, FirstDownloadActivity.class)); // not yet downloaded
 
-        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
-                !SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified but not yet downloaded
-            startActivity(new Intent(SplashActivity.this, FirstDownloadActivity.class));
+//        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
+//                SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified and already downloaded
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//
+//        if (SharedPreferencesHelper.getVerified(getApplicationContext()) &&
+//                !SharedPreferencesHelper.getDataDownloaded(getApplicationContext()))  // verified but not yet downloaded
+//            startActivity(new Intent(SplashActivity.this, FirstDownloadActivity.class));
 
-        if (!SharedPreferencesHelper.getVerified(getApplicationContext()))  // not yet verified
-            startActivity(new Intent(SplashActivity.this, VerificationActivity.class));
+//        if (!SharedPreferencesHelper.getVerified(getApplicationContext()))  // not yet verified
+//            startActivity(new Intent(SplashActivity.this, VerificationActivity.class));
 
         finish();
     }

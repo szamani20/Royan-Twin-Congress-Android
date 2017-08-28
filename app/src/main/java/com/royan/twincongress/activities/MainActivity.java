@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(new Intent(MainActivity.this, AgendaActivity.class));
                                 break;
                             case Constants.ITEM_AGENDA_DOWNLOAD:
-                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.royaninstitute.org/cmsfa/index.php?option=com_content&task=view&id=561&Itemid=100"));
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://royan-edu.ir/2017/final-program-2017.pdf"));
                                 startActivity(browserIntent);
                                 break;
                             case Constants.ITEM_COMPANIES:
